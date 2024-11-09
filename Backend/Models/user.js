@@ -7,17 +7,17 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
         required: true
     },
     cart: [],
-    isAdmin: Boolean,
     orders: [],
     contact: Number,
-    userPicture: String
+    userpicture: String
 })
 
 
