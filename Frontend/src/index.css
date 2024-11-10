@@ -1,0 +1,49 @@
+/* Navbar.css */
+.navbar{
+  border-bottom: 0.1px solid rgba(0, 0, 0, 0.402);
+}
+.navbar-logo {
+  width: 80px; /* Adjust width as needed */
+  height: auto; /* Keeps aspect ratio */
+}
+
+.nav-link {
+  font-weight: bold;
+  color: #000; /* Black color for links */
+}
+
+.navbar-icons .nav-link {
+  font-size: 20px;
+  color: #000;
+}
+/* AuthForm.css */
+
+.container {
+  max-width: 900px;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.brand-name {
+  color: #007bff; /* Matches Bootstrap primary color */
+}
+
+.btn-primary {
+  border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .form-title, .form-subtitle {
+    text-align: center;
+  }
+}

@@ -7,14 +7,14 @@ const GenrateToken = require("../Utils/tokenGenrater");
 
 // Create User
 module.exports.signup = (req, res) => {
-    const { fullname, email, password, contact, userpicture } = req.body;
+    const { fullname, email, password } = req.body;
     try {
         //Hash Password Befor Creating User
         bcrypt.hash(password, 5, async (err, hash) => {
             if (err) return res.status(400).json({ message: "Something Went Wrong!!" })
 
             let user = await userModel.create({
-                fullname, email, password: hash, contact, userpicture
+                fullname, email, password: hash
             })
 
             //Set Token In Cookies
