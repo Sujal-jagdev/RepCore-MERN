@@ -9,6 +9,7 @@ import Mens from './Pages/Mens';
 import Login from './Pages/Login';
 import AdminCreate from './Pages/AdminCreate';
 import AdminLogin from './Pages/AdminLogin';
+import Profile from './Pages/Profile';
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/mens" element={<Mens />} />
                 <Route path="/accessories" element={<Products />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/admin/owner/create" element={<AdminCreate />} />
                 <Route path="/admin/owner/login" element={<AdminLogin />} />
                 <Route path="*" element={<h1>Page Not Found</h1>} />

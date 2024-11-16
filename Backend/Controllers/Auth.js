@@ -41,7 +41,7 @@ module.exports.login = async (req, res) => {
 
             if (result) {
                 let token = GenrateToken(user)
-                res.cookie("token", token).status(200).json({ message: "Welcome To RepCore..." })
+                res.cookie("token", token).status(200).json({ message: "Welcome To RepCore...", user })
             } else {
                 return res.status(400).json({ message: "Invalid Email Or Password!!" })
             }
@@ -54,5 +54,13 @@ module.exports.login = async (req, res) => {
 
 // Logout User
 module.exports.logout = (req, res) => {
-    res.cookie("token", "").status(400).json({ message: "You Must Be Login" })
+    res.cookie("token", "").status(200).json({ message: "You Are Logout" })
+}
+
+module.exports.profile = async (req, res) => {
+    let user = await userModel.findOne({ email: req.user.email })
+    if (!user) {
+        return res.status(401).json({ message: "User Not Found!!" })
+    }
+    res.status(200).json({ message: "Your Profile Details", user })
 }

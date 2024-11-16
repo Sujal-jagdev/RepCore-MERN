@@ -10,7 +10,7 @@ const isLoggedIn = (req, res, next) => {
     try {
         jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
             if (err) return res.status(400).json({ message: "SomeThing Went Wrong!!" })
-
+            req.user = decoded;
             next()
         })
     } catch (error) {

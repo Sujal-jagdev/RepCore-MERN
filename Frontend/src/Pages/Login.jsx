@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { SiTicktick } from "react-icons/si";
 import { GoAlertFill } from "react-icons/go";
+import { useNavigate } from 'react-router-dom';
 
 const AuthForm = () => {
   const [fullname, setFullName] = useState('');
@@ -10,6 +11,7 @@ const AuthForm = () => {
 
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
+  const navigate = useNavigate()
 
 
   const [popuUp, setpopuUp] = useState(null)
@@ -20,6 +22,7 @@ const AuthForm = () => {
     try {
       let response = await axios.post('http://localhost:3000/user/signup', { fullname, email, password }, { withCredentials: true });
       setpopuUp(true)
+      navigate(`/profile`)
     } catch (error) {
       console.log(error)
       setpopuUp(false)
@@ -32,10 +35,10 @@ const AuthForm = () => {
     try {
       let res = await axios.post('http://localhost:3000/user/login', { email: loginEmail, password: loginPassword }, { withCredentials: true });
       setpopuUp(true)
+      navigate(`/profile`)
     } catch (error) {
       console.log(error)
       setpopuUp(false)
-
     }
   };
 
@@ -122,7 +125,7 @@ const AuthForm = () => {
           </form>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
