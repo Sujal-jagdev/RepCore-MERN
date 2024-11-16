@@ -1,6 +1,6 @@
 // App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, BrowserRouter, useLocation } from 'react-router-dom';
 import Navbar from './Components/Navbar'; // Ensure correct path to Navbar component
 import Home from './Pages/Home';
 import Products from './Pages/Products';
@@ -10,11 +10,14 @@ import Login from './Pages/Login';
 import AdminCreate from './Pages/AdminCreate';
 import AdminLogin from './Pages/AdminLogin';
 import Profile from './Pages/Profile';
+import AdminPanel from './Pages/AdminPanel';
 
 function App() {
+    const location = useLocation()
+    console.log(location.pathname)
     return (
         <>
-            <Navbar />
+            {location.pathname !=='/adminpanel' && <Navbar/>}
             <Routes>
                 {/* Define routes here */}
                 <Route path="/" element={<Home />} />
@@ -25,6 +28,7 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/admin/owner/create" element={<AdminCreate />} />
                 <Route path="/admin/owner/login" element={<AdminLogin />} />
+                <Route path="/adminpanel" element={<AdminPanel />} />
                 <Route path="*" element={<h1>Page Not Found</h1>} />
             </Routes>
         </>

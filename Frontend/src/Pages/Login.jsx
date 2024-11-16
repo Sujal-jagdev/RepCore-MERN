@@ -8,19 +8,20 @@ const AuthForm = () => {
   const [fullname, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [contact, setcontact] = useState('');
+  const [userImage, setuserImage] = useState('');
 
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
+
   const navigate = useNavigate()
-
-
   const [popuUp, setpopuUp] = useState(null)
 
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
     // Handle the sign-up logic here
     try {
-      let response = await axios.post('http://localhost:3000/user/signup', { fullname, email, password }, { withCredentials: true });
+      let response = await axios.post('http://localhost:3000/user/signup', { fullname, email, password,contact,userpicture: userImage }, { withCredentials: true });
       setpopuUp(true)
       navigate(`/profile`)
     } catch (error) {
@@ -93,6 +94,26 @@ const AuthForm = () => {
                 required
               />
             </div>
+            <div className="mb-3">
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Contact +91"
+                value={contact}
+                onChange={(e) => setcontact(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Your Image Url"
+                value={userImage}
+                onChange={(e) => setuserImage(e.target.value)}
+                required
+              />
+            </div>
             <button type="submit" className="btn btn-primary w-100">Create My Account</button>
           </form>
         </div>
@@ -124,6 +145,7 @@ const AuthForm = () => {
             <button type="submit" className="btn btn-primary w-100">Login</button>
           </form>
         </div>
+
       </div>
     </div >
   );

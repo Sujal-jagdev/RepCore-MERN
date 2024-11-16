@@ -14,7 +14,6 @@ const AdminLogin = () => {
         try {
             let res = await axios.post('http://localhost:3000/owner/login', { email, password }, { withCredentials: true });
             setpopuUp(true)
-            console.log(res)
         } catch (error) {
             console.log(error)
             setpopuUp(false)
