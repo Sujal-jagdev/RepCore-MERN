@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     cart: [],
     orders: [],
     contact: Number,
-    userpicture: String
+    userpicture: Buffer
 })
 
 

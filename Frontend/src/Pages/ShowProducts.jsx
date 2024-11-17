@@ -1,70 +1,62 @@
-import React from "react";
-
-// Mock Data for Products
-const products = [
-    {
-        id: 1,
-        name: "Tshirt",
-        price: "₹1200",
-        bgColor: "#f1c40f",
-        panelColor: "#e74c3c",
-    },
-    {
-        id: 2,
-        name: "T Shirt",
-        price: "₹1200",
-        bgColor: "#f1c40f",
-        panelColor: "#e74c3c",
-    },
-];
+import React, { useContext, useEffect, useState } from "react";
+import { MyContext } from "../Contexts/AllContext";
+import { LuPlus } from "react-icons/lu";
 
 const ShowProducts = () => {
+    const { product } = useContext(MyContext);
+    const [productsWithImages, setProductsWithImages] = useState([]);
+
+    useEffect(() => {
+        const convertImages = async () => {
+            const updatedProducts = await Promise.all(
+                product.map((e) => {
+                    const bufferData = e.image.data;
+                    const blob = new Blob([new Uint8Array(bufferData)], { type: "image/jpeg" });
+
+                    return new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                            resolve({ ...e, base64Image: reader.result });
+                        };
+                        reader.readAsDataURL(blob);
+                    });
+                })
+            );
+
+            setProductsWithImages(updatedProducts);
+        };
+
+        convertImages();
+    }, [product]);
+
     return (
         <div className="my-5">
-            <div className="row justify-content-center">
-                {products.map((product) => (
-                    <div className="col-6 col-md-3 mb-4" key={product.id}>
-                        <div
-                            className="d-flex flex-column align-items-center justify-content-between"
-                            style={{
-                                width: "200px",
-                                height: "250px",
-                                backgroundColor: product.bgColor,
-                                borderRadius: "8px",
-                                overflow: "hidden",
-                            }}
-                        >
-                            <div
-                                style={{
-                                    flex: 1,
-                                    width: "100%",
-                                }}
-                            ></div>
-                            <div
-                                className="w-100 text-center"
-                                style={{
-                                    backgroundColor: product.panelColor,
-                                    padding: "10px 0",
-                                    color: "#fff",
-                                    fontWeight: "bold",
-                                }}
-                            >
-                                <p
-                                    style={{
-                                        margin: 0,
-                                        fontSize: "1rem",
-                                    }}
-                                >
-                                    {product.name}
-                                </p>
-                                <p
-                                    style={{
-                                        margin: 0,
-                                        fontSize: "1rem",
-                                    }}
-                                >
-                                    {product.price}
-                                </p>
+            <div className="row justify-content-center gap-3">
+                {productsWithImages.map((e, index) => (
+                    <div
+                        key={index}
+                        className="col-3 p-0 rounded border"
+                        style={{
+                            height: "250px",
+                            backgroundColor: e.bgColor,
+                            boxShadow: `0.5px 0.5px 3.6px ${e.bgColor}`,
+                        }}
+                    >
+                        <div className="col-12">
+                            <img
+                                className="col-12"
+                                style={{ height: "170px", objectFit: "cover" }}
+                                src={e.base64Image}
+                                alt={e.name}
+                            />
+                        </div>
+                        <div className="col-12 p-3 d-flex" style={{ backgroundColor: e.panelColor }}>
+                            <div className="col-9" style={{ color: e.textColor }}>
+                                <h5 className="fw-lighter">{e.name}</h5>
+                                <h6 style={{ marginTop: "-8px" }}>${e.price}</h6>
+                            </div>
+                            <div className="col-2 text-end">
+                                <LuPlus className="fs-3 rounded-pill p-1" style={{ color: e.textColor, border: `1px solid ${e.textColor}` }} />
                             </div>
                         </div>
                     </div>

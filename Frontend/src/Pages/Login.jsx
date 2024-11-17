@@ -9,7 +9,7 @@ const AuthForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [contact, setcontact] = useState('');
-  const [userImage, setuserImage] = useState('');
+  const [userpicture, setuserpicture] = useState('');
 
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
@@ -21,7 +21,14 @@ const AuthForm = () => {
     e.preventDefault();
     // Handle the sign-up logic here
     try {
-      let response = await axios.post('http://localhost:3000/user/signup', { fullname, email, password,contact,userpicture: userImage }, { withCredentials: true });
+      const formData = new FormData();
+      formData.append('userpicture', userpicture);
+      formData.append("fullname", fullname);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("contact", contact);
+
+      let response = await axios.post('http://localhost:3000/user/signup', formData, { withCredentials: true });
       setpopuUp(true)
       navigate(`/profile`)
     } catch (error) {
@@ -63,7 +70,9 @@ const AuthForm = () => {
         <div className="col-lg-5 col-md-6 col-sm-8 m-auto col-12 mb-4">
           <h3 className="form-title">Welcome to <span className="brand-name">RepCore</span></h3>
           <p className="form-subtitle">Create your account</p>
-          <form onSubmit={handleSignUpSubmit}>
+
+          <form onSubmit={handleSignUpSubmit} encType="multipart/form-data">
+
             <div className="mb-3">
               <input
                 type="text"
@@ -74,6 +83,7 @@ const AuthForm = () => {
                 required
               />
             </div>
+
             <div className="mb-3">
               <input
                 type="email"
@@ -84,6 +94,7 @@ const AuthForm = () => {
                 required
               />
             </div>
+
             <div className="mb-3">
               <input
                 type="password"
@@ -94,6 +105,7 @@ const AuthForm = () => {
                 required
               />
             </div>
+
             <div className="mb-3">
               <input
                 type="number"
@@ -104,18 +116,21 @@ const AuthForm = () => {
                 required
               />
             </div>
+
             <div className="mb-3">
               <input
-                type="text"
+                type="file"
                 className="form-control"
                 placeholder="Your Image Url"
-                value={userImage}
-                onChange={(e) => setuserImage(e.target.value)}
+                name='userpicture'
+                onChange={(e) => setuserpicture(e.target.files[0])}
                 required
               />
             </div>
+
             <button type="submit" className="btn btn-primary w-100">Create My Account</button>
           </form>
+
         </div>
 
         {/* Login Form */}

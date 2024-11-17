@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ShowProducts from "./ShowProducts";
 import CreateProduct from "./CreateProduct";
-// import "bootstrap/dist/css/bootstrap.min.css"; // Make sure you have Bootstrap in your project
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { MyContext } from '../Contexts/AllContext'
 
 const AdminPanel = () => {
   const [activeTab, setActiveTab] = useState("show");
+  const navigate = useNavigate()
+  const { product, setproduct } = useContext(MyContext)
+
+  const isAdmin = async () => {
+    try {
+      let product = await axios.get("http://localhost:3000/product/allproducts", { withCredentials: true })
+      setproduct(product.data.products)
+    } catch (error) {
+      navigate("/")
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    isAdmin()
+  }, [])
+
 
   return (
     <div className="d-flex">

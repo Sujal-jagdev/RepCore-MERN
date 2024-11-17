@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const navigate = useNavigate()
   const [userData, setuserData] = useState({})
+  const [base64Image, setbase64Image] = useState(null)
+  
   const isAuth = async () => {
     try {
       let res = await axios.get(`http://localhost:3000/user/profile`, { withCredentials: true })
       setuserData(res.data.user)
-      console.log(res)
+
+      let bufferData = res.data.user.userpicture.data;
+      let blob = new Blob([new Uint8Array(bufferData)], { type: 'image/jpeg' }); // Adjust the type (image/jpeg) accordingly
+      let reader = new FileReader();
+
+      reader.onloadend = function () {
+        setbase64Image(reader.result.split(',')[1])  // Get the Base64-encoded data (remove the metadata part)
+        // This is the Base64 string for the image
+      };
+
+      reader.readAsDataURL(blob);
     } catch (error) {
       console.log(error)
       navigate('/login')
@@ -37,7 +48,7 @@ const Profile = () => {
       <div className=' container-lg p-5 d-flex justify-content-between col-12'>
         <div className=' d-flex col-5 p-2'>
           <div className='col-3 m-2' style={{ height: '100px', borderRadius: '50%', objectFit: 'cover', overflow: 'hidden' }}>
-            <img src={userpicture} alt="ok" className='col-12' style={{ height: '100%', objectFit: 'cover' }} />
+            <img src={`data:image/jpeg;base64,${base64Image}`} alt="You Profie Image Has Been Some Issue" className='col-12' style={{ height: '100%', objectFit: 'cover' }} />
           </div>
 
           <div className=' ms-2 col-9'>

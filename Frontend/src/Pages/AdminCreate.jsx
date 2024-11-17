@@ -2,12 +2,14 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { SiTicktick } from "react-icons/si";
 import { GoAlertFill } from "react-icons/go";
+import { useNavigate } from 'react-router-dom';
 
 const AdminLogin = () => {
     const [fullname, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [popuUp, setpopuUp] = useState(null)
+    const navigate = useNavigate()
 
     const handleOwnerLoginSubmit = async (e) => {
         e.preventDefault();
@@ -15,9 +17,11 @@ const AdminLogin = () => {
         try {
             let res = await axios.post('http://localhost:3000/owner/create', { fullname, email, password }, {withCredentials: true});
             setpopuUp(true)
+            navigate("/adminpanel")
         } catch (error) {
             console.log(error)
             setpopuUp(false)
+            navigate("/")
         }
     };
     return (

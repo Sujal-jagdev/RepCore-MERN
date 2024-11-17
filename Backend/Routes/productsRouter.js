@@ -1,28 +1,14 @@
 const express = require("express")
 const productRouter = express.Router();
-const multer = require("multer");
 const upload = require("../Config/multerConfig");
 const productModel = require("../Models/product");
 const isOwner = require("../Middlewares/isOwner");
+const { createPost, getAllProducts, getWomensProducts } = require("../Controllers/Product");
 
-productRouter.post("/create", isOwner, upload.single("image"), async (req, res) => {
-    const { name, price, discount, category, bgColor, panelColor, textColor } = req.body;
-    try {
-        let product = await productModel.create({
-            image: req.file.buffer,
-            name,
-            price,
-            discount,
-            category,
-            bgColor,
-            panelColor,
-            textColor
-        })
+productRouter.post("/create", isOwner, upload.single("image"), createPost)
 
-        res.status(200).json({ message: "Product Add Successfully" })
-    } catch (error) {
-        res.status(400).json({ message: "Something Went Wrong", error })
-    }
-})
+productRouter.get("/allproducts",isOwner, getAllProducts)
+productRouter.get("/womensproducts", getWomensProducts)
+
 
 module.exports = productRouter;
