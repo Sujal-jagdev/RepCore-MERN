@@ -32,7 +32,7 @@ module.exports.getAllProducts = async (req, res) => {
 
 module.exports.getWomensProducts = async (req,res)=>{
     try {
-        let products = await productModel.find({category: 'Acessories'})
+        let products = await productModel.find({category: 'Women'})
         res.status(200).json({ message: "Products Get Sucessfully!!", products })
     } catch (error) {
         res.status(400).json({ message: "Something Went Wrong", error })

@@ -1,7 +1,4 @@
 /* Navbar.css */
-.navbar{
-  border-bottom: 0.1px solid rgba(0, 0, 0, 0.402);
-}
 .navbar-logo {
   width: 80px; /* Adjust width as needed */
   height: auto; /* Keeps aspect ratio */
