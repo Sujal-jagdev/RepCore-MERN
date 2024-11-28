@@ -9,14 +9,14 @@ import Logo from '../assets/Logo.png';
 const Navbar = () => {
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light p-0" style={{ height: '80px' }}>
+            <nav className="navbar navbar-expand-lg navbar-light p-0" >
                 <div className=" container-fluid">
                     {/* Left-aligned logo */}
                     <Link className="navbar-brand" to="/">
                         <img src={Logo} alt="Logo" className="navbar-logo" />
                     </Link>
 
-                    <div className="navbar-icons d-flex align-items-center justify-content-center m-auto d-lg-none d-md-flex d-sm-flex d-none">
+                    <div className="d-flex align-items-center justify-content-center m-auto d-lg-none d-md-flex d-sm-flex d-none">
                         <Link className="nav-link" to="/search">
                             <IoSearchOutline />
                         </Link>
@@ -37,7 +37,7 @@ const Navbar = () => {
                     </button>
 
                     {/* Center-aligned Links */}
-                    <div className="collapse navbar-collapse justify-content-center ps-lg-5 " id="navbarNav">
+                    <div className="collapse navbar-collapse justify-content-center ps-lg-5 position-sticky" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 <Link className="nav-link" to="/womens">WOMEN'S</Link>
@@ -52,7 +52,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Right-aligned Icons (centered on larger screens, moved below on mobile) */}
-                    <div className="navbar-icons d-lg-flex align-items-center justify-content-center d-sm-none d-sm-none d-md-none  d-flex col-12 col-lg-3 gap-lg-2 gap-4">
+                    <div className="d-lg-flex align-items-center justify-content-center d-sm-none d-sm-none d-md-none  d-flex col-12 col-lg-3 gap-lg-2 gap-4">
                         <Link className="nav-link" to="/search">
                             <IoSearchOutline />
                         </Link>

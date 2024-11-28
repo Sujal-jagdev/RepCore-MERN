@@ -45,23 +45,26 @@ const Profile = () => {
   return (
     <>
       <h2 className=' text-center m-3'>Your RepCore Account</h2>
-      <div className=' container-lg p-5 d-flex justify-content-between col-12'>
-        <div className=' d-flex col-5 p-2'>
-          <div className='col-3 m-2' style={{ height: '100px', borderRadius: '50%', objectFit: 'cover', overflow: 'hidden' }}>
+      <div className=' container-lg p-5 d-lg-flex justify-content-between col-12'>
+        <div className=' d-lg-flex d-sm-flex d-md-flex col-lg-5 p-2 col-md-6 col-sm-9 col-12'>
+          <div className='col-lg-3 col-sm-3 col-md-3 col-6 m-lg-2 m-sm-2 m-md-2 m-auto' style={{ height: '100px', borderRadius: '50%', objectFit: 'cover', overflow: 'hidden' }}>
             <img src={`data:image/jpeg;base64,${base64Image}`} alt="You Profie Image Has Been Some Issue" className='col-12' style={{ height: '100%', objectFit: 'cover' }} />
           </div>
 
-          <div className=' ms-2 col-9'>
+          <div className=' ms-2 col-lg-9 col-sm-9 col-md-9 col-12'>
             <h3>Hello, {fullname} 👋</h3>
             <h6>You ID: {email}</h6>
             <h6>+91 {contact}</h6>
             <h6 style={{ cursor: 'pointer' }} className=' text-danger fw-bolder' onClick={HandleLogout}>Logout</h6>
           </div>
         </div>
-        <div className='bg-dark ms-3' style={{ padding: '1px', height: '350px' }}> </div>
-        <div className=' col-7 p-4'>
+
+        <div className='bg-dark ms-3 d-lg-block d-none' style={{ padding: '1px', height: '350px' }}> </div>
+
+        <div className=' col-lg-7 col-12 p-4'>
           <h3>Your Orders: </h3>
         </div>
+
       </div>
     </>
   )

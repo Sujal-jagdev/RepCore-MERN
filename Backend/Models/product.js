@@ -18,6 +18,7 @@ const productSchema = new mongoose.Schema({
         default: 0
     },
     category: String,
+    subcategory: String,
     bgColor: String,
     panelColor: String,
     textColor: String

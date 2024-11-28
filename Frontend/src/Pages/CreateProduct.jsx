@@ -13,6 +13,7 @@ const CreateProduct = () => {
         discount: "",
         bgColor: "",
         category: "",
+        subcategory: "",
         panelColor: "",
         textColor: "",
     });
@@ -39,6 +40,7 @@ const CreateProduct = () => {
             formData.append("category", product.category);
             formData.append("panelColor", product.panelColor);
             formData.append("textColor", product.textColor);
+            formData.append("subcategory", product.subcategory);
 
             let res = await axios.post('http://localhost:3000/product/create', formData, { withCredentials: true })
             setpopuUp(true)
@@ -141,6 +143,26 @@ const CreateProduct = () => {
                             onChange={handleChange}
                             placeholder="Enter Product Category"
                         />
+                    </div>
+
+                    <div className="mb-3 col-md-6">
+                        <label htmlFor="subcategory" className="form-label">
+                            Product Sub Category
+                        </label>
+                        <br />
+                        <select name="subcategory" onChange={handleChange} id="subcategory" value={product.subcategory} className="form-control col-12 p-2 fw-bold">
+                            <option value="" className="fw-bold">Enter Product Sub Category</option>
+                            <option value="Leggings" className="fw-bold">Leggings</option>
+                            <option value="Short Leggings" className="fw-bold">Short Leggings</option>
+                            <option value="Women Joggers" className="fw-bold">Women Joggers</option>
+                            <option value="Women Hoodie" className="fw-bold">Women Hoodie</option>
+                            <option value="Bras" className="fw-bold">Bras</option>
+                            <option value="Men Shorts" className="fw-bold">Men Shorts</option>
+                            <option value="Men Joggers" className="fw-bold">Men Joggers</option>
+                            <option value="T-shirt" className="fw-bold">T-shirt</option>
+                            <option value="Men Hoodie" className="fw-bold">Men Hoodie</option>
+                            <option value="Accessories" className="fw-bold">Accessories</option>
+                        </select>
                     </div>
                 </div>
 

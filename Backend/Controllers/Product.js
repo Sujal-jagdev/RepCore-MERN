@@ -2,7 +2,7 @@ const express = require("express")
 const productModel = require("../Models/product");
 
 module.exports.createPost = async (req, res) => {
-    const { name, price, discount, category, bgColor, panelColor, textColor } = req.body;
+    const { name, price, discount, category, bgColor, panelColor, textColor, subcategory, imageurl } = req.body;
     try {
         let product = await productModel.create({
             image: req.file.buffer,
@@ -10,6 +10,7 @@ module.exports.createPost = async (req, res) => {
             price,
             discount,
             category,
+            subcategory,
             bgColor,
             panelColor,
             textColor
@@ -30,10 +31,21 @@ module.exports.getAllProducts = async (req, res) => {
     }
 }
 
-module.exports.getWomensProducts = async (req,res)=>{
+module.exports.getWomensProducts = async (req, res) => {
     try {
-        let products = await productModel.find({category: 'Women'})
+        let products = await productModel.find({ $or: [{ category: 'Women' }, { category: 'women scroll' }] })
         res.status(200).json({ message: "Products Get Sucessfully!!", products })
+    } catch (error) {
+        res.status(400).json({ message: "Something Went Wrong", error })
+    }
+}
+
+module.exports.deleteproduct = async (req, res) => {
+    try {
+        let id = req.params.id;
+
+        let me = await productModel.findOneAndDelete({ _id: id })
+        res.status(200).json({ message: "Products Deleted Sucessfully!!" })
     } catch (error) {
         res.status(400).json({ message: "Something Went Wrong", error })
     }

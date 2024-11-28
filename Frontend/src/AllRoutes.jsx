@@ -14,10 +14,10 @@ import AdminPanel from './Pages/AdminPanel';
 
 function App() {
     const location = useLocation()
-    console.log(location.pathname)
+
     return (
         <>
-            {location.pathname !=='/adminpanel' && <Navbar/>}
+            {location.pathname !== '/adminpanel' && <Navbar />}
             <Routes>
                 {/* Define routes here */}
                 <Route path="/" element={<Home />} />

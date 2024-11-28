@@ -1,10 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../Contexts/AllContext";
 import { LuPlus } from "react-icons/lu";
+import { MdDelete } from "react-icons/md";
+import axios from 'axios'
 
 const ShowProducts = () => {
     const { product } = useContext(MyContext);
     const [productsWithImages, setProductsWithImages] = useState([]);
+
+
+    const handleDeleteProduct =async (e)=>{
+        // e.preventDefault()c
+        console.log(e._id)
+        let res = await axios.delete(`http://localhost:3000/product/deleteproduct/${e._id}`,{ withCredentials: true })
+        alert("Product Deleted Successfully!!")
+        console.log(res)
+    }
 
     useEffect(() => {
         const convertImages = async () => {
@@ -29,13 +40,15 @@ const ShowProducts = () => {
         convertImages();
     }, [product]);
 
+
+
     return (
         <div className="my-5">
             <div className="row justify-content-center gap-3">
                 {productsWithImages.map((e, index) => (
                     <div
                         key={index}
-                        className="col-3 p-0 rounded border"
+                        className="col-4 p-0 rounded border"
                         style={{
                             height: "250px",
                             backgroundColor: e.bgColor,
@@ -55,8 +68,9 @@ const ShowProducts = () => {
                                 <h5 className="fw-lighter">{e.name}</h5>
                                 <h6 style={{ marginTop: "-8px" }}>${e.price}</h6>
                             </div>
-                            <div className="col-2 text-end">
-                                <LuPlus className="fs-3 rounded-pill p-1" style={{ color: e.textColor, border: `1px solid ${e.textColor}` }} />
+                            <div className="col-4 text-end d-flex gap-3">
+                                <LuPlus className="fs-3 rounded-pill p-1" style={{ color: e.textColor, border: `1px solid ${e.textColor}`,cursor: 'pointer' }} />
+                                <MdDelete className="fs-3 rounded-pill p-1" style={{ color: e.textColor, border: `1px solid ${e.textColor}`, cursor: 'pointer' }} onClick={()=>handleDeleteProduct(e)}/>
                             </div>
                         </div>
                     </div>
