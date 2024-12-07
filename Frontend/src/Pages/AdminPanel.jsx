@@ -22,7 +22,7 @@ const AdminPanel = () => {
 
   useEffect(() => {
     isAdmin()
-  }, [])
+  }, [product])
 
 
   return (

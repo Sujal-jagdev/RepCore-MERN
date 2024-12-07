@@ -9,12 +9,13 @@ const ShowProducts = () => {
     const [productsWithImages, setProductsWithImages] = useState([]);
 
 
-    const handleDeleteProduct =async (e)=>{
-        // e.preventDefault()c
-        console.log(e._id)
-        let res = await axios.delete(`http://localhost:3000/product/deleteproduct/${e._id}`,{ withCredentials: true })
-        alert("Product Deleted Successfully!!")
-        console.log(res)
+    const handleDeleteProduct = async (e) => {
+        try {
+            await axios.delete(`http://localhost:3000/product/deleteproduct/${e._id}`, { withCredentials: true })
+            alert("Product Deleted Successfully!!")
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     useEffect(() => {
@@ -38,12 +39,13 @@ const ShowProducts = () => {
         };
 
         convertImages();
-    }, [product]);
+    }, [product, handleDeleteProduct]);
 
 
 
     return (
-        <div className="my-5">
+        <div className="">
+            <h2 className=" text-center m-3 fw-bold">All Producsts</h2>
             <div className="row justify-content-center gap-3">
                 {productsWithImages.map((e, index) => (
                     <div
@@ -52,7 +54,7 @@ const ShowProducts = () => {
                         style={{
                             height: "250px",
                             backgroundColor: e.bgColor,
-                            boxShadow: `0.5px 0.5px 3.6px ${e.bgColor}`,
+                            boxShadow: `1px 5px 10px ${e.bgColor}`,
                         }}
                     >
                         <div className="col-12">
@@ -69,8 +71,8 @@ const ShowProducts = () => {
                                 <h6 style={{ marginTop: "-8px" }}>${e.price}</h6>
                             </div>
                             <div className="col-4 text-end d-flex gap-3">
-                                <LuPlus className="fs-3 rounded-pill p-1" style={{ color: e.textColor, border: `1px solid ${e.textColor}`,cursor: 'pointer' }} />
-                                <MdDelete className="fs-3 rounded-pill p-1" style={{ color: e.textColor, border: `1px solid ${e.textColor}`, cursor: 'pointer' }} onClick={()=>handleDeleteProduct(e)}/>
+                                <LuPlus className="fs-3 rounded-pill p-1" style={{ color: e.textColor, border: `1px solid ${e.textColor}`, cursor: 'pointer' }} />
+                                <MdDelete className="fs-3 rounded-pill p-1" style={{ color: e.textColor, border: `1px solid ${e.textColor}`, cursor: 'pointer' }} onClick={() => handleDeleteProduct(e)} />
                             </div>
                         </div>
                     </div>
