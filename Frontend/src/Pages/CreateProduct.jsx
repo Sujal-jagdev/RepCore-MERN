@@ -19,30 +19,14 @@ const CreateProduct = () => {
     });
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        if (name === "image") {
-            // If the input is a file input, set the file instead of the value
-            setProduct({ ...product, [name]: files[0] });
-        } else {
+        const { name, value } = e.target;
             setProduct({ ...product, [name]: value });
-        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const formData = new FormData();
-            formData.append('image', product.image);
-            formData.append("name", product.name);
-            formData.append("price", product.price);
-            formData.append("discount", product.discount);
-            formData.append("bgColor", product.bgColor);
-            formData.append("category", product.category);
-            formData.append("panelColor", product.panelColor);
-            formData.append("textColor", product.textColor);
-            formData.append("subcategory", product.subcategory);
-
-            let res = await axios.post('http://localhost:3000/product/create', formData, { withCredentials: true })
+            await axios.post('http://localhost:3000/product/create', product, { withCredentials: true })
             setpopuUp(true)
         } catch (error) {
             console.log(error)
@@ -65,18 +49,19 @@ const CreateProduct = () => {
                     </div>
                 </div>
             }
-            <form onSubmit={handleSubmit} className="p-4 rounded border" encType="multipart/form-data">
+            <form onSubmit={handleSubmit} className="p-4 rounded border">
                 {/* Product Image */}
                 <div className="mb-3">
                     <label htmlFor="image" className="form-label">
                         Product Image
                     </label>
                     <input
-                        type="file"
+                        type="text"
                         className="form-control"
                         id="image"
                         name="image"
                         onChange={handleChange}
+                        placeholder="Enter product ImageURL"
                     />
                 </div>
 

@@ -19,7 +19,7 @@ function App() {
         <>
             {location.pathname !== '/adminpanel' && <Navbar />}
             <Routes>
-                {/* Define routes here */}
+                
                 <Route path="/" element={<Home />} />
                 <Route path="/womens" element={<Womens />} />
                 <Route path="/mens" element={<Mens />} />

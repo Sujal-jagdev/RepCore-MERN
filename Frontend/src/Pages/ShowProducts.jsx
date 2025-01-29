@@ -6,8 +6,6 @@ import axios from 'axios'
 
 const ShowProducts = () => {
     const { product } = useContext(MyContext);
-    const [productsWithImages, setProductsWithImages] = useState([]);
-
 
     const handleDeleteProduct = async (e) => {
         try {
@@ -18,36 +16,11 @@ const ShowProducts = () => {
         }
     }
 
-    useEffect(() => {
-        const convertImages = async () => {
-            const updatedProducts = await Promise.all(
-                product.map((e) => {
-                    const bufferData = e.image.data;
-                    const blob = new Blob([new Uint8Array(bufferData)], { type: "image/jpeg" });
-
-                    return new Promise((resolve) => {
-                        const reader = new FileReader();
-                        reader.onloadend = () => {
-                            resolve({ ...e, base64Image: reader.result });
-                        };
-                        reader.readAsDataURL(blob);
-                    });
-                })
-            );
-
-            setProductsWithImages(updatedProducts);
-        };
-
-        convertImages();
-    }, [product, handleDeleteProduct]);
-
-
-
     return (
         <div className="">
             <h2 className=" text-center m-3 fw-bold">All Producsts</h2>
             <div className="row justify-content-center gap-3">
-                {productsWithImages.map((e, index) => (
+                {product.map((e, index) => (
                     <div
                         key={index}
                         className="col-4 p-0 rounded border"
@@ -61,7 +34,7 @@ const ShowProducts = () => {
                             <img
                                 className="col-12"
                                 style={{ height: "170px", objectFit: "cover" }}
-                                src={e.base64Image}
+                                src={e.image}
                                 alt={e.name}
                             />
                         </div>

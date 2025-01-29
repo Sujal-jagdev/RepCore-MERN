@@ -2,10 +2,10 @@ const express = require("express")
 const productModel = require("../Models/product");
 
 module.exports.createPost = async (req, res) => {
-    const { name, price, discount, category, bgColor, panelColor, textColor, subcategory } = req.body;
+    const { image, name, price, discount, category, bgColor, panelColor, textColor, subcategory } = req.body;
     try {
         await productModel.create({
-            image: req.file.buffer,
+            image,
             name,
             price,
             discount,

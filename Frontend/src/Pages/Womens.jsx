@@ -1,106 +1,56 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaStar } from "react-icons/fa";
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-
-import '../index.css';
-
-// import required modules
-import { Pagination } from 'swiper/modules';
+import SideBar from './SideBar';
+import { useDispatch, useSelector } from "react-redux";
+import { getData } from '../Redux/ProductSortSlice';
 
 const Womens = () => {
-  const [showData, setshowData] = useState([]);
-  const [productsWithImages, setProductsWithImages] = useState([]);
+  // const [showData, setshowData] = useState([]);
 
-  const getData = async () => {
-    let res = await axios.get("http://localhost:3000/product/womensproducts");
-    setshowData(res.data.products);
-  };
+  // const getData = async () => {
+  //   let res = await axios.get("http://localhost:3000/product/womensproducts");
+  //   setshowData(res.data.products);
+  // };
 
-  console.log(showData)
+  const dispatch = useDispatch();
+  let { products } = useSelector((state) => state.Product)
+  console.log(products)
   useEffect(() => {
-    getData();
-  }, []);
-
-  useEffect(() => {
-    const convertImages = async () => {
-      const updatedProducts = await Promise.all(
-        showData.map((e) => {
-          const bufferData = e.image.data;
-          const blob = new Blob([new Uint8Array(bufferData)], { type: "image/jpeg" });
-
-          return new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-              resolve({ ...e, base64Image: reader.result });
-            };
-            reader.readAsDataURL(blob);
-          });
-        })
-      );
-
-      setProductsWithImages(updatedProducts);
-    };
-
-    if (showData.length > 0) {
-      convertImages();
-    }
-  }, [showData]);
+    dispatch(getData());
+  }, [dispatch]);
 
   return (
     <div>
-      <div className='col-12 p-5 text-center text-light' style={{ backgroundColor: '#111' }}>
-        <h2 className='fw-bolder'>GET AN EXTRA 20% OFF SALE ITEMS</h2>
-        <h6 className='fw-normal'>Drop code EXTRA20 and thank us with a new PR.</h6>
-        <button className='btn bg-light text-dark rounded-pill ps-4 pe-4 fw-bolder'>SHOP WOMEN</button>
+
+      <div className=' position-relative'>
+        <img src="https://www.gymshark.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fwl6q2in9o7k3%2F1RIRvNcYBOQ79f5h4KF46j%2Faf54c802a061c1a82bc47632e6b808c3%2FDESKTOP.png&w=1664&q=85" alt="" className='col-12 w-100' />
+        <div className=' position-absolute top-50 ms-5'>
+          <h1 className=' fw-bolder'>Best Sellers</h1>
+          <h6 className=' fw-bold'>Comfortable, reliable, and loved by gym lovers.</h6>
+        </div>
       </div>
 
-      <div className='col-12'>
-        <video
-          src="https://videos.ctfassets.net/wl6q2in9o7k3/16mZlbejxhQbzGHzGB8iFu/202e8ff4eff610ed5883a4bd5beb9a3d/Female_Look_Montage_V1_BANNER_3840x1440.mp4"
-          className='col-12'
-          autoPlay
-          loop
-          muted
-        ></video>
-      </div>
 
-      <div className='container-fluid'>
-        <h2 className='col-12 p-3 fw-bold mt-4'>SHOP WOMEN'S SALE</h2>
-        <div className='position-relative h-100'>
-          <Swiper
-            spaceBetween={5}
-            pagination={{
-              clickable: true,
-            }}
-            breakpoints={{
-              // Responsive design for different screen sizes
-              320: { slidesPerView: 1 }, // Mobile
-              768: { slidesPerView: 2 }, // Tablet
-              1024: { slidesPerView: 3 }, // Desktop
-            }}
-            modules={[Pagination]}
-            className="mySwiper"
-          >
-            {productsWithImages.map((e, index) => (
-              e.category == "women scroll" ? <SwiperSlide key={index} className="d-flex flex-column align-items-center position-relative">
-                <img
-                  src={e.base64Image}
-                  alt={e.name}
-                  style={{ width: "100%", height: "450px", objectFit: "cover" }}
-                />
-                <div className=' position-absolute text-light mt-5'>
-                  <h5 className=" fw-bold fs-2">{e.name}</h5>
-                  <button className=' btn bg-light text-dark rounded-2 ps-5 pe-5 fw-bold'>Shop Now</button>
+
+      <div className='mt-3 col-12 d-flex'>
+        <div className='col-3 mt-4 position-relative  '>
+          <SideBar />
+        </div>
+        <div className='p-4 d-flex flex-wrap col-9'>
+          {/* {
+            showData.map((e) => (
+              <div className=' col-4'>
+                <div className='col-11'>
+                  <img src={e.image} alt="" className='col-12' />
                 </div>
-              </SwiperSlide> : ''
-            ))}
-
-          </Swiper>
+                <div className=' mt-2'>
+                  <h6 style={{ fontSize: '15px' }}>{e.name}</h6>
+                  <h6>{e.bgColor}</h6>
+                  <h6>Price: ${e.price} <span className=' text-danger'><s>${e.discount}</s></span></h6>
+                </div>
+              </div>
+            ))
+          } */}
         </div>
       </div>
     </div>
