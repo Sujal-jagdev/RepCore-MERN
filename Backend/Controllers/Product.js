@@ -50,3 +50,16 @@ module.exports.deleteproduct = async (req, res) => {
         res.status(400).json({ message: "Something Went Wrong", error })
     }
 }
+
+module.exports.GetOneProduct = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const isProduct = await productModel.findById({ _id: id })
+        if (!isProduct) {
+            return res.status(400).json({ message: "Product Not Found" })
+        }
+        res.status(200).json({ message: "Product Get Successfully", isProduct })
+    } catch (error) {
+        res.status(400).json({ message: "Something Went Wrong", error })
+    }
+}

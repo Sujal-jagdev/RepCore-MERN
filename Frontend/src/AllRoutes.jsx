@@ -11,6 +11,7 @@ import AdminCreate from './Pages/AdminCreate';
 import AdminLogin from './Pages/AdminLogin';
 import Profile from './Pages/Profile';
 import AdminPanel from './Pages/AdminPanel';
+import Description from './Pages/Description';
 
 function App() {
     const location = useLocation()
@@ -19,10 +20,11 @@ function App() {
         <>
             {location.pathname !== '/adminpanel' && <Navbar />}
             <Routes>
-                
+
                 <Route path="/" element={<Home />} />
                 <Route path="/womens" element={<Womens />} />
                 <Route path="/mens" element={<Mens />} />
+                <Route path="/description/:id" element={<Description />} />
                 <Route path="/accessories" element={<Products />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
