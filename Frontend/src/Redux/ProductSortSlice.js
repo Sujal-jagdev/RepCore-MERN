@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
-import { useEffect } from 'react';
-
 
 export const getData = createAsyncThunk("ProductSort/getData", async (route) => {
     try {
@@ -34,10 +32,6 @@ export const ProductSortSlice = createSlice({
         },
         sortbyColor: (state, action) => {
             state.products = state.allproducts.filter((e) => e.bgColor == action.payload)
-        },
-        getOneProduct: (state, action) => {
-            let res = state.allproducts.filter((e) => e._id == action.payload)
-            console.log(JSON.parse(JSON.stringify(res)))
         }
     },
     extraReducers: (builder) => {
@@ -46,16 +40,16 @@ export const ProductSortSlice = createSlice({
                 state.loading = true;
             })
             .addCase(getData.fulfilled, (state, action) => {
-                // state.loading = false;
+                state.loading = false;
                 state.allproducts = action.payload;
                 state.products = action.payload;
             })
             .addCase(getData.rejected, (state, action) => {
                 state.error = true;
                 console.error("API Error:", action.error);
-            });
+            })
     }
 })
 
-export const { sorting, HLPrice, LHPrice, sortbyColor, getOneProduct } = ProductSortSlice.actions;
+export const { sorting, HLPrice, LHPrice, sortbyColor } = ProductSortSlice.actions;
 export default ProductSortSlice.reducer;

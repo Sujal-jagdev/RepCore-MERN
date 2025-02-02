@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    cart: [],
+    cart: [{ type: mongoose.Schema.Types.ObjectId, ref: 'productModel'}],
     orders: [],
     contact: Number,
     userpicture: Buffer

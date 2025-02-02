@@ -13,7 +13,14 @@ const Womens = () => {
 
   useEffect(() => {
     dispatch(getData('womensproducts'))
-  }, [dispatch]);
+  }, []);
+
+  if (loading) {
+    return <div className="text-center mt-5"><div className="spinner-border" role="status"></div></div>;
+  }
+  if (error || !products) {
+    return <div className="text-center mt-5 text-danger">Product not found!</div>;
+  }
 
   return (
     <div>
@@ -32,7 +39,7 @@ const Womens = () => {
         </div>
         <div className='p-4 d-flex flex-wrap col-9'>
           {
-            loading ? <h1 className=' text-center col-12'>Loading...</h1> : error ? <h1>Error</h1> : products.map((e) => (
+            products.map((e) => (
               <Link to={`/description/${e._id}`} className=' col-4 text-decoration-none text-dark' key={e._id}>
                 <div>
                   <div className='col-11'>

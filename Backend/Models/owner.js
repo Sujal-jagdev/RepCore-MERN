@@ -12,7 +12,7 @@ const ownerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    products: [],
+    products: [String],
     userPicture: String
 })
 

@@ -14,7 +14,7 @@ const isLoggedIn = (req, res, next) => {
             next()
         })
     } catch (error) {
-        res.status(400).json({ message: "SomeThing Went Wrong!!" })
+        res.status(400).json({ message: "SomeThing Went Wrong while Authenticate User",error })
     }
 }
 

@@ -20,10 +20,6 @@ app.use("/user", userRouter)
 app.use("/product", productRouter)
 app.use("/owner", ownerRouter)
 
-app.get("/shop", isLoggedIn, (req, res) => {
-    res.send("Welcome to the shop")
-})
-
 app.listen(process.env.PORT, () => {
     console.log('Server Started Successfully')
 })

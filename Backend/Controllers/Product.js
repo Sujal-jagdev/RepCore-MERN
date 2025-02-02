@@ -1,5 +1,6 @@
 const express = require("express")
 const productModel = require("../Models/product");
+const userModel = require("../Models/user");
 
 module.exports.createPost = async (req, res) => {
     const { image, name, price, discount, category, bgColor, panelColor, textColor, subcategory } = req.body;
@@ -59,6 +60,22 @@ module.exports.GetOneProduct = async (req, res) => {
             return res.status(400).json({ message: "Product Not Found" })
         }
         res.status(200).json({ message: "Product Get Successfully", isProduct })
+    } catch (error) {
+        res.status(400).json({ message: "Something Went Wrong", error })
+    }
+}
+
+module.exports.AddToCart = async (req, res) => {
+    const { id } = req.params;
+    const userID  = req.user.id;
+
+    try {
+        const isProduct = await productModel.findById(id)
+        if (!isProduct) {
+            return res.status(400).json({ message: "Product Not Found" })
+        }
+        await userModel.findByIdAndUpdate({ _id: userID}, {$push: {cart: isProduct._id}}, { new: true })
+        res.status(200).json({ message: "Product Added To Cart SucessFully" })
     } catch (error) {
         res.status(400).json({ message: "Something Went Wrong", error })
     }

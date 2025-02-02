@@ -1,24 +1,43 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getData, getOneProduct } from '../Redux/ProductSortSlice';
+import { GetOneProduct } from '../Redux/GetOneProductSlice';
 
 const Description = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.Product)
+  const { singleProduct, loading, error } = useSelector((state) => state.GetOneProduct)
 
   useEffect(() => {
-    dispatch(getData("allproducts"))
-  }, [dispatch])
-  useEffect(() => {
-    let data = dispatch(getOneProduct(id))
-    console.log(data)
-  }, [dispatch])
+    dispatch(GetOneProduct(id));
+  }, []);
 
+  if (loading) {
+    return <div className="text-center mt-5"><div className="spinner-border" role="status"></div></div>;
+  }
+  if (error || !singleProduct) {
+    return <div className="text-center mt-5 text-danger">Product not found!</div>;
+  }
 
   return (
-    <div>Description</div>
+    <div className="container">
+      <div className="d-flex flex-column flex-md-row align-items-center text-center text-md-start p-3">
+        <img
+          src={singleProduct.image}
+          alt={singleProduct.name}
+          className="img-fluid rounded shadow-sm w-100 w-md-50"
+          style={{ maxWidth: '400px' }}
+        />
+        <div className="ms-md-4 mt-3 mt-md-0">
+          <h2 className="fw-bold">{singleProduct.name}</h2>
+          <h5>Color: {singleProduct.bgColor}</h5>
+          <h5 className="text-success">Price: ${singleProduct.price}</h5>
+          <h5 className=' text-danger'>Discount: <s>${singleProduct.discount}</s></h5>
+          <p className="text-muted">{singleProduct.description}</p>
+          <button className="btn btn-primary px-4 mt-3">Add To Cart</button>
+        </div>
+      </div>
+    </div>
   )
 }
 
