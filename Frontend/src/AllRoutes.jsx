@@ -12,6 +12,7 @@ import AdminLogin from './Pages/AdminLogin';
 import Profile from './Pages/Profile';
 import AdminPanel from './Pages/AdminPanel';
 import Description from './Pages/Description';
+import CartPage from './Pages/CartPage';
 
 function App() {
     const location = useLocation()
@@ -20,7 +21,6 @@ function App() {
         <>
             {location.pathname !== '/adminpanel' && <Navbar />}
             <Routes>
-
                 <Route path="/" element={<Home />} />
                 <Route path="/womens" element={<Womens />} />
                 <Route path="/mens" element={<Mens />} />
@@ -31,6 +31,7 @@ function App() {
                 <Route path="/admin/owner/create" element={<AdminCreate />} />
                 <Route path="/admin/owner/login" element={<AdminLogin />} />
                 <Route path="/adminpanel" element={<AdminPanel />} />
+                <Route path="/cartpage" element={<CartPage />} />
                 <Route path="*" element={<h1>Page Not Found</h1>} />
             </Routes>
         </>

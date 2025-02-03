@@ -67,14 +67,17 @@ module.exports.GetOneProduct = async (req, res) => {
 
 module.exports.AddToCart = async (req, res) => {
     const { id } = req.params;
-    const userID  = req.user.id;
+    const userID = req.user.id;
 
     try {
-        const isProduct = await productModel.findById(id)
+        const isProduct = await productModel.findById(id);
+        if (!userID) {
+            return res.status(400).json({ meesage: "After Login You Can Use Add To Cart Feature.!!" })
+        }
         if (!isProduct) {
             return res.status(400).json({ message: "Product Not Found" })
         }
-        await userModel.findByIdAndUpdate({ _id: userID}, {$push: {cart: isProduct._id}}, { new: true })
+        await userModel.findByIdAndUpdate({ _id: userID }, { $push: { cart: isProduct._id } }, { new: true })
         res.status(200).json({ message: "Product Added To Cart SucessFully" })
     } catch (error) {
         res.status(400).json({ message: "Something Went Wrong", error })

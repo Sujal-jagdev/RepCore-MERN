@@ -6,7 +6,7 @@ const Profile = () => {
   const navigate = useNavigate()
   const [userData, setuserData] = useState({})
   const [base64Image, setbase64Image] = useState(null)
-  
+
   const isAuth = async () => {
     try {
       let res = await axios.get(`http://localhost:3000/user/profile`, { withCredentials: true })

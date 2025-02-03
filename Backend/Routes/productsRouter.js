@@ -8,7 +8,7 @@ const isLoggedIn = require("../Middlewares/isLoggedin");
 
 productRouter.post("/create", isOwner, createPost)
 
-productRouter.get("/allproducts", isOwner, getAllProducts)
+productRouter.get("/allproducts", getAllProducts)
 productRouter.get("/womensproducts", getWomensProducts)
 productRouter.get("/getoneproduct/:id", GetOneProduct)
 productRouter.delete("/deleteproduct/:id", isOwner, deleteproduct)

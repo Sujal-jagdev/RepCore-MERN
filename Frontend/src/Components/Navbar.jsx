@@ -62,7 +62,7 @@ const Navbar = () => {
                         <Link className="nav-link" to="/profile">
                             <FaRegUser />
                         </Link>
-                        <Link className="nav-link" to="/cart">
+                        <Link className="nav-link" to="/cartpage">
                             <IoBagHandleOutline />
                         </Link>
                     </div>
