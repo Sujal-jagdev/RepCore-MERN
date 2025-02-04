@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { GetallProduct } from "./AllProductSlice";
 
 
 export const AddProductToCart = createAsyncThunk('AddToCart/AddProductToCart', async (id) => {
@@ -26,6 +27,7 @@ export const GetCartProduct = createAsyncThunk('AddToCart/GetCartProduct', async
 
 const initialState = {
     cartData: [],
+    AllProducts: [],
     loading: false,
     error: null
 }
