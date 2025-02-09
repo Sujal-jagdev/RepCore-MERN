@@ -17,25 +17,25 @@ module.exports.createPost = async (req, res) => {
             textColor
         })
 
-        res.status(200).json({ message: "Product Add Successfully" })
+        return res.status(200).json({ message: "Product Add Successfully" })
     } catch (error) {
-        res.status(400).json({ message: "Something Went Wrong", error })
+        return res.status(400).json({ message: "Something Went Wrong", error })
     }
 }
 
 module.exports.getAllProducts = async (req, res) => {
     try {
         let products = await productModel.find()
-        res.status(200).json({ message: "Products Get Sucessfully!!", products })
+        return res.status(200).json({ message: "Products Get Sucessfully!!", products })
     } catch (error) {
-        res.status(400).json({ message: "Something Went Wrong", error })
+        return res.status(400).json({ message: "Something Went Wrong", error })
     }
 }
 
 module.exports.getWomensProducts = async (req, res) => {
     try {
         let products = await productModel.find({ $or: [{ category: 'Women' }, { category: 'women scroll' }] })
-        res.status(200).json({ message: "Products Get Sucessfully!!", products })
+        return res.status(200).json({ message: "Products Get Sucessfully!!", products })
     } catch (error) {
         res.status(400).json({ message: "Something Went Wrong", error })
     }
@@ -46,9 +46,9 @@ module.exports.deleteproduct = async (req, res) => {
         let id = req.params.id;
 
         let me = await productModel.findOneAndDelete({ _id: id })
-        res.status(200).json({ message: "Products Deleted Sucessfully!!" })
+        return res.status(200).json({ message: "Products Deleted Sucessfully!!" })
     } catch (error) {
-        res.status(400).json({ message: "Something Went Wrong", error })
+        return res.status(400).json({ message: "Something Went Wrong", error })
     }
 }
 
@@ -59,9 +59,9 @@ module.exports.GetOneProduct = async (req, res) => {
         if (!isProduct) {
             return res.status(400).json({ message: "Product Not Found" })
         }
-        res.status(200).json({ message: "Product Get Successfully", isProduct })
+        return res.status(200).json({ message: "Product Get Successfully", isProduct })
     } catch (error) {
-        res.status(400).json({ message: "Something Went Wrong", error })
+        return res.status(400).json({ message: "Something Went Wrong", error })
     }
 }
 
@@ -78,8 +78,21 @@ module.exports.AddToCart = async (req, res) => {
             return res.status(400).json({ message: "Product Not Found" })
         }
         await userModel.findByIdAndUpdate({ _id: userID }, { $push: { cart: isProduct._id } }, { new: true })
-        res.status(200).json({ message: "Product Added To Cart SucessFully" })
+        return res.status(200).json({ message: "Product Added To Cart SucessFully" })
     } catch (error) {
-        res.status(400).json({ message: "Something Went Wrong", error })
+        return res.status(400).json({ message: "Something Went Wrong", error })
+    }
+}
+
+module.exports.GetAddedCartProduct = async (req, res) => {
+    const userID = req.user.id;
+    if (!userID) {
+        return res.status(404).json({ message: "User Not Found!!" });
+    }
+    try {
+        let res = await userModel.findById(userID);
+
+    } catch (error) {
+        return res.status(400).json({ message: "Something Went Wrong", error })
     }
 }

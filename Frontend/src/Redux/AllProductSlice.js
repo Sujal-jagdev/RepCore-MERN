@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
 export const GetallProduct = createAsyncThunk('AddToCart/GetAllProduct', async () => {
     try {
         let res = await axios.get('http://localhost:3000/product/allproducts');
@@ -23,10 +22,21 @@ const GetAllProduct = createSlice({
     initialState,
     reducers: {
         GetProductFromID: (state, action) => {
-            state.product = state.AllProduct.products.filter((e) => 
-                action.payload.some((id) => e._id == id)
-            );
-            console.log(state.product)
+            const res = state.AllProduct.products.filter((e) => {
+                for (let i = 0; i < action.payload.length; i++) {
+                    if (e._id == action.payload[i]) {
+                       state.product.push(e)
+                    }
+                }
+                return false;
+            })
+
+            // state.product = res;
+            // state.product = state.AllProduct.products.filter((e) => 
+            //     action.payload.some((id) => e._id == id)
+            // );
+            // console.log(JSON.parse(JSON.stringify(state.product)))
+            // console.log(JSON.parse(JSON.stringify(state.AllProduct.products)))
         }
     },
     extraReducers: (builder) => {

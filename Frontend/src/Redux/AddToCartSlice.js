@@ -17,7 +17,7 @@ export const AddProductToCart = createAsyncThunk('AddToCart/AddProductToCart', a
 
 export const GetCartProduct = createAsyncThunk('AddToCart/GetCartProduct', async () => {
     try {
-        let res = await axios.get(`http://localhost:3000/user/profile`, { withCredentials: true })
+        let res = await axios.get(`http://localhost:3000/user/profile`, { withCredentials: true });
         return res.data.user.cart;
     } catch (error) {
         Navigate('/login')

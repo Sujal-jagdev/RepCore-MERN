@@ -3,7 +3,7 @@ import ShowProducts from "./ShowProducts";
 import CreateProduct from "./CreateProduct";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { MyContext } from '../Contexts/AllContext'
+import { MyContext } from '../Contexts/AllContext';
 
 const AdminPanel = () => {
   const [activeTab, setActiveTab] = useState("show");
