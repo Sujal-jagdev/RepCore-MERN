@@ -24,7 +24,13 @@ const Description = () => {
   }
 
   const AddToCartProduct = (id) => {
-    dispatch(AddProductToCart(id))
+    let res = dispatch(AddProductToCart(id))
+    res.then((e) => {
+      if (e.error) {
+        alert("After Login You Can Use Add To Cart Feature")
+        navigate("/login")
+      }
+    })
   }
 
   return (

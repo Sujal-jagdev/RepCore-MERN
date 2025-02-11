@@ -3,7 +3,6 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { GetallProduct } from "./AllProductSlice";
 
-
 export const AddProductToCart = createAsyncThunk('AddToCart/AddProductToCart', async (id) => {
     try {
         let res = await axios.post(`http://localhost:3000/product/addtocart/${id}`, {}, { withCredentials: true })
@@ -21,6 +20,15 @@ export const GetCartProduct = createAsyncThunk('AddToCart/GetCartProduct', async
         return res.data.user.cart;
     } catch (error) {
         Navigate('/login')
+        console.log(error)
+    }
+})
+
+export const RemoveingCartProduct = createAsyncThunk('AddToCart/RemoveCartProduct', async (id)=>{
+    try {
+       let res = await axios.post(`http://localhost:3000/product/user/removeproduct/${id}`, {}, { withCredentials: true })
+        return res;
+    } catch (error) {
         console.log(error)
     }
 })

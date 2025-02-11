@@ -84,14 +84,18 @@ module.exports.AddToCart = async (req, res) => {
     }
 }
 
-module.exports.GetAddedCartProduct = async (req, res) => {
+module.exports.RemoveCartProduct = async (req, res) => {
     const userID = req.user.id;
+    const { id } = req.params;
     if (!userID) {
         return res.status(404).json({ message: "User Not Found!!" });
     }
+    if (!id) {
+        return res.status(404).json({ message: "Product Not Found!!" });
+    }
     try {
-        let res = await userModel.findById(userID);
-
+        await userModel.findByIdAndUpdate({ _id: userID }, { $pull: { cart: id } }, { new: true })
+        return res.status(200).json({ message: "Product Removed From Cart SucessFully" })
     } catch (error) {
         return res.status(400).json({ message: "Something Went Wrong", error })
     }
