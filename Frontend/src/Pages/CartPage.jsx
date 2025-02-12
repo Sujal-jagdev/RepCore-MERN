@@ -73,6 +73,14 @@ const CartPage = () => {
         res.then((e) => alert("Product Removed From Cart SucessFully"))
     }
 
+    const getTotalProductCount = () => {
+        let totalCount = 0;
+        for (let key in productCount) {
+            totalCount += productCount[key]; // Add each product count
+        }
+        return totalCount;
+    };
+
     return (
         <div>
             <h2 className='text-center m-3 fw-bold'>Your Cart Products</h2>
@@ -102,6 +110,18 @@ const CartPage = () => {
                         </div>
                     </div>
                 ))}
+                <div className='container mt-3 w-100 d-flex justify-content-between align-items-center border-top pt-3'>
+                    <h5>Total Products: {getTotalProductCount()}</h5>
+                    <h5>
+                        Total Price: $
+                        {uniqueProducts.reduce(
+                            (total, product) =>
+                                total + (product.price * (productCount[product._id] || 1)),
+                            0
+                        )}
+                    </h5>
+                </div>
+
                 <button className='btn btn-primary mt-3 col-10'>Buy All Products</button>
             </div>
         </div>

@@ -5,9 +5,7 @@ import { getData, HLPrice, LHPrice, sortbyColor, sorting } from "../Redux/Produc
 const Sidebar = () => {
     const dispatch = useDispatch();
     const SortProduct = (item) => {
-        if (item == "Leggings" || item == "Short Leggings" || item == "Women Joggers" || item == "Women Hoodie" || item == "Bras") {
             dispatch(sorting(item))
-        }
     }
     const SortProductByColor = (color) => {
         dispatch(sortbyColor(color))
@@ -24,7 +22,7 @@ const Sidebar = () => {
 
             <h5 className="mb-3 fw-bolder mt-4">Product Type</h5>
             <ul className="list-group mb-3">
-                {['Leggings', 'Short Leggings', 'Women Joggers', 'Women Hoodie', 'Bras'].map((item, index) => (
+                {['Men Shorts', 'Men Joggers', 'T-shirt', 'Men Hoodie'].map((item, index) => (
                     <li key={index} style={{ cursor: 'pointer', fontSize: '18px' }} onClick={() => SortProduct(item)} className="list-group-item list-group-item-action p-3">{item}</li>
                 ))}
             </ul>

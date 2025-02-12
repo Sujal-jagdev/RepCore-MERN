@@ -32,12 +32,22 @@ module.exports.getAllProducts = async (req, res) => {
     }
 }
 
+module.exports.GetMensProducts = async (req, res) => {
+    try {
+        let products = await productModel.find({ $or: [{ category: 'Men' }] })
+        console.log(products)
+        return res.status(200).json({ message: "Products Get Sucessfully!!", products })
+    } catch (error) {
+        return res.status(400).json({ message: "Something Went Wrong", error })
+    }
+}
+
 module.exports.getWomensProducts = async (req, res) => {
     try {
         let products = await productModel.find({ $or: [{ category: 'Women' }, { category: 'women scroll' }] })
         return res.status(200).json({ message: "Products Get Sucessfully!!", products })
     } catch (error) {
-        res.status(400).json({ message: "Something Went Wrong", error })
+        return res.status(400).json({ message: "Something Went Wrong", error })
     }
 }
 
