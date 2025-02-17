@@ -146,7 +146,11 @@ const CreateProduct = () => {
                             <option value="Men Joggers" className="fw-bold">Men Joggers</option>
                             <option value="T-shirt" className="fw-bold">T-shirt</option>
                             <option value="Men Hoodie" className="fw-bold">Men Hoodie</option>
-                            <option value="Accessories" className="fw-bold">Accessories</option>
+                            <option value="Socks" className="fw-bold">Socks</option>
+                            <option value="Bags" className="fw-bold">Bags</option>
+                            <option value="Straps" className="fw-bold">Straps</option>
+                            <option value="Bottle" className="fw-bold">Bottle</option>
+                            <option value="Cap" className="fw-bold">Cap</option>
                         </select>
                     </div>
                 </div>

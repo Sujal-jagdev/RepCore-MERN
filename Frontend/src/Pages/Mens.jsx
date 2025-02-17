@@ -4,17 +4,19 @@ import SideBar from './SideBar';
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from '../Redux/ProductSortSlice';
 import { Link } from 'react-router-dom';
+import Sidebar from './SideBar';
 
 const Mens = () => {
 
   const dispatch = useDispatch();
+    const [pagination, setpagination] = useState(1)
 
-  let { products, loading, error } = useSelector((state) => state.Product)
-
+  let { products, loading, error } = useSelector((state) => state.Product);
+  const MenArr = ["Men Shorts", 'Men Joggers', 'T-shirt', 'Men Hoodie'];
 
   useEffect(() => {
-    dispatch(getData('mensproducts'))
-  }, []);
+    dispatch(getData({route: 'mensproducts', page: pagination}))
+  }, [pagination]);
 
   if (loading) {
     return <div className="text-center mt-5"><div className="spinner-border" role="status"></div></div>;
@@ -36,7 +38,7 @@ const Mens = () => {
 
       <div className='mt-3 col-12 d-flex'>
         <div className='col-3 mt-4 position-relative'>
-          <SideBar />
+          <Sidebar items={MenArr}/>
         </div>
         <div className='p-4 d-flex flex-wrap col-9'>
           {
@@ -55,8 +57,13 @@ const Mens = () => {
               </Link>
             ))
           }
+          <div className=' d-flex col-12 justify-content-center gap-3' style={{height: '50px'}}>
+            <button className=' btn border border-1 border-danger text-danger' disabled={pagination == 1} onClick={()=>setpagination(pagination - 1)}>Previos</button>
+            <button className=' btn border border-1 border-primary text-primary' disabled={products.length < 10} onClick={()=>setpagination(pagination + 1)}>Next</button>
+          </div>
         </div>
       </div>
+      
     </div>
   );
 };

@@ -26,25 +26,46 @@ module.exports.createPost = async (req, res) => {
 module.exports.getAllProducts = async (req, res) => {
     try {
         let products = await productModel.find()
-        return res.status(200).json({ message: "Products Get Sucessfully!!", products })
+        return res.status(200).json({ message: "Products Get Sucessfully!!", products, TotalProducts: products.length })
     } catch (error) {
         return res.status(400).json({ message: "Something Went Wrong", error })
     }
 }
 
 module.exports.GetMensProducts = async (req, res) => {
+    let page = Number(req.query.page) || 1;
+    let limit = Number(req.query.limit) || 3;
+    let skip = (page - 1) * limit;
+
+    // page = 2;
+    // limit = 3;
+    // skip = 2 - 1 => 1 * 3 => 3 Skip First 3 and Show Only 3
     try {
-        let products = await productModel.find({ $or: [{ category: 'Men' }] })
-        console.log(products)
-        return res.status(200).json({ message: "Products Get Sucessfully!!", products })
+        let products = await productModel.find({ $or: [{ category: 'Men' }] }).skip(skip).limit(limit);
+        return res.status(200).json({ message: "Products Get Sucessfully!!", products, TotalProducts: products.length })
     } catch (error) {
         return res.status(400).json({ message: "Something Went Wrong", error })
     }
 }
 
 module.exports.getWomensProducts = async (req, res) => {
+    let page = Number(req.query.page) || 1;
+    let limit = Number(req.query.limit) || 3;
+    let skip = (page - 1) * limit;
     try {
-        let products = await productModel.find({ $or: [{ category: 'Women' }, { category: 'women scroll' }] })
+        let products = await productModel.find({ $or: [{ category: 'Women' }, { category: 'women scroll' }] }).skip(skip).limit(limit);
+        return res.status(200).json({ message: "Products Get Sucessfully!!", products, TotalProducts: products.length })
+    } catch (error) {
+        return res.status(400).json({ message: "Something Went Wrong", error })
+    }
+}
+
+module.exports.GetAccessories = async (req, res) => {
+    let page = Number(req.query.page) || 1;
+    let limit = Number(req.query.limit) || 3;
+    let skip = (page - 1) * limit;
+    try {
+        let products = await productModel.find({ $or: [{ category: 'Acessories' }] }).skip(skip).limit(limit);
         return res.status(200).json({ message: "Products Get Sucessfully!!", products })
     } catch (error) {
         return res.status(400).json({ message: "Something Went Wrong", error })

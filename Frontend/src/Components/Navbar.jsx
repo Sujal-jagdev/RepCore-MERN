@@ -17,9 +17,6 @@ const Navbar = () => {
                     </Link>
 
                     <div className="d-flex align-items-center justify-content-center m-auto d-lg-none d-md-flex d-sm-flex d-none">
-                        <Link className="nav-link" to="/search">
-                            <IoSearchOutline />
-                        </Link>
 
                         <Link className="nav-link" to="/profile">
                             <FaRegUser />
@@ -51,9 +48,6 @@ const Navbar = () => {
 
                     {/* Right-aligned Icons (centered on larger screens, moved below on mobile) */}
                     <div className="d-lg-flex align-items-center justify-content-center d-sm-none d-sm-none d-md-none  d-flex col-12 col-lg-3 gap-lg-2 gap-4">
-                        <Link className="nav-link" to="/search">
-                            <IoSearchOutline />
-                        </Link>
                         <Link className="nav-link" to="/profile">
                             <FaRegUser />
                         </Link>

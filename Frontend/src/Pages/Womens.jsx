@@ -8,12 +8,15 @@ import { Link } from 'react-router-dom';
 const Womens = () => {
 
   const dispatch = useDispatch();
+  const [pagination, setpagination] = useState(1)
 
-  let { products, loading, error } = useSelector((state) => state.Product)
+
+  let { products, loading, error } = useSelector((state) => state.Product);
+  const WomenArr = ["Bras", "Women Joggers", "Women Hoodie", 'Leggings', 'Short Leggings', 'T-shirt']
 
   useEffect(() => {
-    dispatch(getData('womensproducts'))
-  }, []);
+    dispatch(getData({route: 'womensproducts', page: pagination}))
+  }, [pagination]);
 
   if (loading) {
     return <div className="text-center mt-5"><div className="spinner-border" role="status"></div></div>;
@@ -35,7 +38,7 @@ const Womens = () => {
 
       <div className='mt-3 col-12 d-flex'>
         <div className='col-3 mt-4 position-relative'>
-          <SideBar />
+          <SideBar items={WomenArr} />
         </div>
         <div className='p-4 d-flex flex-wrap col-9'>
           {
@@ -54,6 +57,10 @@ const Womens = () => {
               </Link>
             ))
           }
+          <div className=' d-flex col-12 justify-content-center gap-3' style={{height: '50px'}}>
+            <button className=' btn border border-1 border-danger text-danger' disabled={pagination == 1} onClick={()=>setpagination(pagination - 1)}>Previos</button>
+            <button className=' btn border border-1 border-primary text-primary' disabled={products.length < 10} onClick={()=>setpagination(pagination + 1)}>Next</button>
+          </div>
         </div>
       </div>
     </div>
