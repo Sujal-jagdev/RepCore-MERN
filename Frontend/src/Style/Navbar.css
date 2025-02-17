@@ -1,0 +1,23 @@
+/* Fixed Navbar Styles */
+.navbar {
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensures the navbar stays on top */
+  border-bottom: 1px solid black;
+}
+
+/* Add padding to the body to avoid overlap with the fixed navbar */
+body {
+  padding-top: 50px; /* Adjust this value to match your navbar height */
+}
+
+/* Mobile View Fix */
+@media (max-width: 767px) {
+  body {
+    padding-top: 70px; /* Adjust the padding for mobile if necessary */
+  }
+}

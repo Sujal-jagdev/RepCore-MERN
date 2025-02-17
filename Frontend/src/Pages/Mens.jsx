@@ -9,13 +9,13 @@ import Sidebar from './SideBar';
 const Mens = () => {
 
   const dispatch = useDispatch();
-    const [pagination, setpagination] = useState(1)
+  const [pagination, setpagination] = useState(1)
 
   let { products, loading, error } = useSelector((state) => state.Product);
   const MenArr = ["Men Shorts", 'Men Joggers', 'T-shirt', 'Men Hoodie'];
 
   useEffect(() => {
-    dispatch(getData({route: 'mensproducts', page: pagination}))
+    dispatch(getData({ route: 'mensproducts', page: pagination }))
   }, [pagination]);
 
   if (loading) {
@@ -28,22 +28,27 @@ const Mens = () => {
   return (
     <div>
 
-      <div className=' position-relative'>
+      <div className=' position-relative col-12 mt-4 mt-sm-1 mt-md-0 mt-lg-0'>
         <img src="https://www.gymshark.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fwl6q2in9o7k3%2F1iuIbb3aa6xrFlg9gtxi5Z%2F1385a8fbe16b1e4c4b657fd4a6776041%2FSTL_Desktop_mens.jpg&w=1664&q=85" alt="" className='col-12 w-100' />
-        <div className=' position-absolute top-50 ms-5'>
+        <div className=' position-absolute top-50 ms-5 d-none d-sm-block d-md-block d-lg-block'>
           <h1 className=' fw-bolder text-light'>Best Sellers</h1>
           <h6 className=' fw-bold text-light'>Comfortable, reliable, and loved by gym lovers.</h6>
         </div>
       </div>
 
-      <div className='mt-3 col-12 d-flex'>
-        <div className='col-3 mt-4 position-relative'>
-          <Sidebar items={MenArr}/>
+      <div className=' col-12 p-2 d-block d-sm-none d-md-none d-lg-none'>
+        <h1 className=' fw-bolder '>Best Sellers</h1>
+        <h6 className=' fw-bold '>Comfortable, reliable, and loved by gym lovers.</h6>
+      </div>
+
+      <div className='mt-3 col-12 d-flex flex-wrap'>
+        <div className='col-md-4 col-lg-3 mt-4 position-relative d-none d-sm-none d-md-block d-lg-block'>
+          <Sidebar items={MenArr} />
         </div>
-        <div className='p-4 d-flex flex-wrap col-9'>
+        <div className='p-lg-4 p-md-4 p-sm-4 p-0 ps-3 ms-sm-0 ms-md-0 ms-lg-0 d-flex flex-wrap col-12 col-md-8 col-lg-9'>
           {
             products.map((e) => (
-              <Link to={`/description/${e._id}`} className=' col-4 text-decoration-none text-dark' key={e._id}>
+              <Link to={`/description/${e._id}`} className='p-2 p-sm-0 p-md-0 p-lg-0 col-6 col-sm-6 col-md-6 col-lg-4 text-decoration-none text-dark' key={e._id}>
                 <div>
                   <div className='col-11'>
                     <img src={e.image} alt="" className='col-12' />
@@ -57,13 +62,12 @@ const Mens = () => {
               </Link>
             ))
           }
-          <div className=' d-flex col-12 justify-content-center gap-3' style={{height: '50px'}}>
-            <button className=' btn border border-1 border-danger text-danger' disabled={pagination == 1} onClick={()=>setpagination(pagination - 1)}>Previos</button>
-            <button className=' btn border border-1 border-primary text-primary' disabled={products.length < 10} onClick={()=>setpagination(pagination + 1)}>Next</button>
+          <div className='  d-flex col-12 justify-content-center gap-3' style={{ height: '50px' }}>
+            <button className=' btn border border-1 border-danger text-danger' disabled={pagination == 1} onClick={() => setpagination(pagination - 1)}>Previos</button>
+            <button className=' btn border border-1 border-primary text-primary' disabled={products.length < 10} onClick={() => setpagination(pagination + 1)}>Next</button>
           </div>
         </div>
       </div>
-      
     </div>
   );
 };
