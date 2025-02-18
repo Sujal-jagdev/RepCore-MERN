@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SideBar from './SideBar';
 import { useDispatch, useSelector } from "react-redux";
-import { getData } from '../Redux/ProductSortSlice';
+import { getData, HLPrice, LHPrice } from '../Redux/ProductSortSlice';
 import { Link } from 'react-router-dom';
+import Sidebar from './SideBar';
 
 const Womens = () => {
 
@@ -39,6 +40,22 @@ const Womens = () => {
       <div className=' col-12 p-2 d-block d-sm-none d-md-none d-lg-none'>
         <h1 className=' fw-bolder'>Best Sellers</h1>
         <h6 className=' fw-bold'>Comfortable, reliable, and loved by gym lovers.</h6>
+      </div>
+
+      <div className=' col-12 d-lg-none d-md-none d-flex justify-content-evenly mt-sm-3'>
+        <button className=' btn border border-1 border-success text-success m-1 col-sm-4' onClick={() => dispatch(HLPrice())}>High To Low</button>
+        <button className=' btn border border-1 border-danger text-danger m-1 col-sm-4' onClick={() => dispatch(LHPrice())}>Low To High</button>
+        <button className=' btn border border-1 border-primary text-primary m-1 col-sm-3' type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Filters</button>
+      </div>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+          <h3 id="offcanvasRightLabel">More Fillters</h3>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <Sidebar items={WomenArr} />
+        </div>
       </div>
 
       <div className='mt-3 col-12 d-flex flex-wrap'>
