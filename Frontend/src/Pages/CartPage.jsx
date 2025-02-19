@@ -75,7 +75,7 @@ const CartPage = () => {
 
     return (
         <div>
-            <h2 className='text-center m-3 fw-bold'>Your Cart Products</h2>
+            <h2 className='text-center m-3 fw-bold mt-5 pt-5'>Your Cart Products</h2>
             <div className='p-3 d-flex flex-column align-items-center col-12'>
                 {uniqueProducts?.map((e) => (
                     <div className='row col-lg-10 col-12 border rounded p-2 mb-2 shadow-sm' key={e._id}>

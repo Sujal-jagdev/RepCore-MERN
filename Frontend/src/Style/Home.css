@@ -58,4 +58,142 @@
       gap: 10px;
     }
   }
+
+  .landing-page {
+    background: url('https://www.gymshark.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fwl6q2in9o7k3%2F30gMSUTgl0dr1O7aaFHews%2F08aae1127eba45dd5240685cfa8f273a%2F8-3_banner_SS_TOPS_copy.jpg&w=1200&q=85') no-repeat center center/cover;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  .overlay {
+    background: rgba(0, 0, 0, 0.2); /* Adds a dark overlay */
+    min-height: 100vh;
+    display: flex;
+  }
+  
+  .category-section {
+    background: #f4f4f4;
+    padding: 50px 0;
+  }
+  
+  .category-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .category-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+  }
+  
+  .category-card:hover .category-overlay {
+    opacity: 1;
+  }
+  
+  .category-overlay h4 {
+    font-size: 1.5rem;
+  }
+  
+  .category-overlay button {
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 25px;
+  }
+
+  .hover-effect {
+    transition: all 0.3s ease;
+  }
+  
+  .hover-effect:hover {
+    background-color: #333;
+    color: #fff;
+    border-color: #fff;
+    transform: scale(1.05);
+  }
+
+  .shop-card img {
+    transition: transform 0.3s ease;
+  }
+  
+  .shop-card img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .shop-section h3 {
+    color: #333;
+    font-size: 1.25rem;
+  }
+  .ShopNowBtn{
+    color: #fff;
+  }
+  .ShopNowBtn:hover{
+    background-color: #fff;
+    color: #000;
+    transition: 0.7s;
+  }
+
+  .footer h5 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .footer ul {
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .footer ul li {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .footer ul li:hover {
+    color: #007bff;
+  }
+  
+  .footer .social-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .footer .social-icon:hover {
+    color: #007bff;
+  }
+  
+  .footer-links a {
+    text-decoration: none;
+    color: #6c757d;
+    margin-left: 0.5rem;
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+    color: #007bff;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-links {
+      text-align: center;
+      margin-top: 1rem;
+    }
+  }
   

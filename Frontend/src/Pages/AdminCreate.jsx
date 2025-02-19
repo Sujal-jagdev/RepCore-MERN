@@ -25,7 +25,7 @@ const AdminLogin = () => {
         }
     };
     return (
-        <div className="col-lg-5 col-md-6 col-sm-8 m-sm-auto col-12 pt-4 ">
+        <div className="col-lg-5 col-md-6 col-sm-8 m-sm-auto col-12 pt-4">
 
             {
                 popuUp ? <div className="alert alert-success d-flex align-items-center" role="alert">
@@ -40,7 +40,7 @@ const AdminLogin = () => {
                     </div>
                 </div>
             }
-            <h3 className="form-title">Only Admin Create</h3>
+            <h3 className="form-title mt-5">Only Admin Create</h3>
             <form onSubmit={handleOwnerLoginSubmit}>
                 <div className="mb-3">
                     <input

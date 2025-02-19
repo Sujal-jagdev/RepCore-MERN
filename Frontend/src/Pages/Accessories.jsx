@@ -3,6 +3,7 @@ import Sidebar from './SideBar'
 import { useDispatch, useSelector } from 'react-redux';
 import { getData, HLPrice, LHPrice } from '../Redux/ProductSortSlice';
 import { Link } from 'react-router-dom';
+import Footer from '../Components/Footer';
 
 const Accessories = () => {
 
@@ -25,11 +26,11 @@ const Accessories = () => {
 
   return (
     <>
-      <div className=" container-fluid mt-4">
+      <div className=" container-fluid mt-5 pt-3">
         <div className="row">
           <div className="col-12">
             <h1 className="fw-bold">ALL ACCESSORIES</h1>
-            <p className="text-muted">269 Products</p>
+            <p className="text-muted">All roducts</p>
           </div>
         </div>
         <div className="row">
@@ -91,7 +92,6 @@ const Accessories = () => {
           </div>
         </div>
       </div>
-
     </>
   )
 }

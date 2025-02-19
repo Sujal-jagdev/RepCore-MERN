@@ -14,6 +14,7 @@ import Description from './Pages/Description';
 import CartPage from './Pages/CartPage';
 import Accessories from './Pages/Accessories';
 import Cookies from 'js-cookie';
+import Footer from './Components/Footer';
 
 function App() {
     const location = useLocation();
@@ -33,11 +34,14 @@ function App() {
                 <Route path="/admin/owner/create" element={<AdminCreate />} />
                 <Route path="/admin/owner/login" element={<AdminLogin />} />
                 <Route path="/adminpanel" element={
-                    token ? <AdminPanel /> : <Navigate to={"/"}/>
+                    token ? <AdminPanel /> : <Navigate to={"/"} />
                 } />
                 <Route path="/cartpage" element={<CartPage />} />
                 <Route path="*" element={<h1>Page Not Found</h1>} />
             </Routes>
+            <div className=' mt-5'>
+            {location.pathname !== '/adminpanel' && <Footer />}
+            </div>
         </>
     );
 }

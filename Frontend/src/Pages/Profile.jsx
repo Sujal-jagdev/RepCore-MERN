@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Components/Footer';
 
 const Profile = () => {
   const navigate = useNavigate()
@@ -44,7 +45,7 @@ const Profile = () => {
   const { fullname, email, cart, orders, contact, userpicture } = userData;
   return (
     <>
-      <h2 className=' text-center m-3'>Your RepCore Account</h2>
+      <h2 className=' text-center m-3 mt-5 pt-5'>Your RepCore Account</h2>
       <div className=' container-lg p-5 d-lg-flex justify-content-between col-12'>
         <div className=' d-lg-flex d-sm-flex d-md-flex col-lg-5 p-2 col-md-6 col-sm-9 col-12'>
           <div className='col-lg-3 col-sm-3 col-md-3 col-6 m-lg-2 m-sm-2 m-md-2 m-auto' style={{ height: '100px', borderRadius: '50%', objectFit: 'cover', overflow: 'hidden' }}>
