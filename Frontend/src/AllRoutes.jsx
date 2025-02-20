@@ -39,9 +39,10 @@ function App() {
                 <Route path="/cartpage" element={<CartPage />} />
                 <Route path="*" element={<h1>Page Not Found</h1>} />
             </Routes>
-            <div className=' mt-5'>
-            {location.pathname !== '/adminpanel' && <Footer />}
+            <div className="mt-5">
+                {location.pathname !== '/adminpanel' && location.pathname !== '/profile' && <Footer />}
             </div>
+
         </>
     );
 }
