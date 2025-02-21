@@ -37,7 +37,7 @@
 <img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/ProductsPage.jpg" alt="Products Page" width="800">
 
 <h3>🛒 Cart Page (Login Required)</h3>
-<img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/CartPage.jpg?token=GHSAT0AAAAAACY4KQUEYN4LJWS7TYG25TE2Z5YTFQA" alt="Cart Page" width="800">
+<img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/CartPage.jpg" alt="Cart Page" width="800">
 
 <h3>👤 Profile Page (Login Required)</h3>
 <img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/ProfiePage.jpg?token=GHSAT0AAAAAACY4KQUFX76OMV7DADYCEYLYZ5YTF5A" alt="Profile Page" width="800">
