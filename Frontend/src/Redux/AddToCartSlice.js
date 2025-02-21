@@ -5,7 +5,7 @@ import { API } from "../Contexts/AllContext";
 
 export const AddProductToCart = createAsyncThunk('AddToCart/AddProductToCart', async (id) => {
     try {
-        let res = await axios.post(`${API}/product/addtocart/${id}`, {}, { withCredentials: true })
+        let res = await axios.post(`https://repcore-mern.onrender.com/product/addtocart/${id}`, {}, { withCredentials: true })
         alert("Product Add SucessFully At Cart")
         return res.data;
     } catch (error) {
