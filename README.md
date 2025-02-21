@@ -1,37 +1,54 @@
-🏋️‍♂️ Repcore – Gym & Fitness Store
-Repcore is a fully functional gym & fitness e-commerce website built with modern web technologies. It offers seamless product browsing, filtering, and sorting with a secure authentication system for user-specific access.
+<h1>🏋️‍♂️ Repcore – Gym & Fitness Store</h1>
 
-🚀 Features
-✅ Product Categories
+<p>Repcore is a fully functional gym & fitness e-commerce website built with modern web technologies. It offers seamless product browsing, filtering, and sorting with a secure authentication system for user-specific access.</p>
 
-Women: Bras, Joggers, Hoodies, Leggings, Short Leggings, T-shirts
-Men: Shorts, Joggers, T-shirts, Hoodies
-Accessories: Socks, Bags, Straps, Bottles, Caps
-✅ Sorting & Filtering
+<h2>🚀 Features</h2>
 
-Sort By Price: High to Low, Low to High
-Filter By Color: Red, Green, Blue, Black, White, and more
-✅ User Authentication
+<h3>✅ Product Categories</h3>
+<ul>
+  <li><b>Women:</b> Bras, Joggers, Hoodies, Leggings, Short Leggings, T-shirts</li>
+  <li><b>Men:</b> Shorts, Joggers, T-shirts, Hoodies</li>
+  <li><b>Accessories:</b> Socks, Bags, Straps, Bottles, Caps</li>
+</ul>
 
-Cart and Profile pages are accessible only after login
-✅ Admin Panel
+<h3>✅ Sorting & Filtering</h3>
+<ul>
+  <li><b>Sort By Price:</b> High to Low, Low to High</li>
+  <li><b>Filter By Color:</b> Red, Green, Blue, Black, White, and more</li>
+</ul>
 
-View all products (Admins can delete products)
-Add new products
-🖼️ Screenshots
-🏠 Home Page
+<h3>✅ User Authentication</h3>
+<ul>
+  <li>Cart and Profile pages are accessible <b>only after login</b></li>
+</ul>
 
-🛍️ Products Page
+<h3>✅ Admin Panel</h3>
+<ul>
+  <li>View all products (<b>Admins can delete products</b>)</li>
+  <li>Add new products</li>
+</ul>
 
-🛒 Cart Page (Login Required)
+<h2>🖼️ Screenshots</h2>
 
-👤 Profile Page (Login Required)
+<h3>🏠 Home Page</h3>
+<img src="https://via.placeholder.com/800x400?text=Home+Page" alt="Home Page" width="800">
 
-🛠️ Admin Panel
+<h3>🛍️ Products Page</h3>
+<img src="https://via.placeholder.com/800x400?text=Products+Page" alt="Products Page" width="800">
 
-🏗️ Tech Stack
-Frontend: React, Redux, Bootstrap
-Backend: Node.js, Express, MongoDB
-Authentication: Firebase / JWT
-Database: MongoDB
-📌 Let me know if you want to modify or add anything!
+<h3>🛒 Cart Page (Login Required)</h3>
+<img src="https://via.placeholder.com/800x400?text=Cart+Page" alt="Cart Page" width="800">
+
+<h3>👤 Profile Page (Login Required)</h3>
+<img src="https://via.placeholder.com/800x400?text=Profile+Page" alt="Profile Page" width="800">
+
+<h3>🛠️ Admin Panel</h3>
+<img src="https://via.placeholder.com/800x400?text=Admin+Panel" alt="Admin Panel" width="800">
+
+<h2>🏗️ Tech Stack</h2>
+<ul>
+  <li><b>Frontend:</b> React, Redux, Bootstrap</li>
+  <li><b>Backend:</b> Node.js, Express, MongoDB</li>
+  <li><b>Authentication:</b> Firebase / JWT</li>
+  <li><b>Database:</b> MongoDB</li>
+</ul>
