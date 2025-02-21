@@ -34,16 +34,16 @@
 <img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/HomePage.jpg?token=GHSAT0AAAAAACY4KQUEFSQ3Y5XEUESDBZSWZ5YTFIA" alt="Home Page" width="800">
 
 <h3>🛍️ Products Page</h3>
-<img src="[https://via.placeholder.com/800x400?text=Products+Page](https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/ProductsPage.jpg?token=GHSAT0AAAAAACY4KQUFVMNX4Y3LGAZUZQHMZ5YTFYQ)" alt="Products Page" width="800">
+<img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/ProductsPage.jpg?token=GHSAT0AAAAAACY4KQUFVMNX4Y3LGAZUZQHMZ5YTFYQ" alt="Products Page" width="800">
 
 <h3>🛒 Cart Page (Login Required)</h3>
 <img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/CartPage.jpg?token=GHSAT0AAAAAACY4KQUEYN4LJWS7TYG25TE2Z5YTFQA" alt="Cart Page" width="800">
 
 <h3>👤 Profile Page (Login Required)</h3>
-<img src="[https://via.placeholder.com/800x400?text=Profile+Page](https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/ProfiePage.jpg?token=GHSAT0AAAAAACY4KQUFX76OMV7DADYCEYLYZ5YTF5A)" alt="Profile Page" width="800">
+<img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/ProfiePage.jpg?token=GHSAT0AAAAAACY4KQUFX76OMV7DADYCEYLYZ5YTF5A" alt="Profile Page" width="800">
 
 <h3>🛠️ Admin Panel</h3>
-<img src="[https://via.placeholder.com/800x400?text=Admin+Panel](https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/Adminpanel.jpg?token=GHSAT0AAAAAACY4KQUEYCDIMW7DN566FBKIZ5YTFVA)" alt="Admin Panel" width="800">
+<img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/Adminpanel.jpg?token=GHSAT0AAAAAACY4KQUEYCDIMW7DN566FBKIZ5YTFVA" alt="Admin Panel" width="800">
 
 <h2>🏗️ Tech Stack</h2>
 <ul>
