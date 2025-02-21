@@ -59,7 +59,11 @@ module.exports.login = async (req, res) => {
 
 // Logout User
 module.exports.logout = (req, res) => {
-    res.cookie("token", "").status(200).json({ message: "You Are Logout" })
+    res.cookie("token", "", {
+        httpOnly: true,
+        secure: true,  // ✅ Required for HTTPS
+        sameSite: "none" // ✅ Important for cross-origin cookies
+      }).status(200).json({ message: "You Are Logout" })
 }
 
 module.exports.profile = async (req, res) => {
