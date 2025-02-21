@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react'
 
 export const MyContext = createContext();
-export const API = `http://localhost:3000`;
+export const API = `https://repcore-mern.onrender.com`;
 
 const AllContext = ({ children }) => {
   const [product, setproduct] = useState([])
