@@ -34,7 +34,7 @@
 <img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/HomePage.jpg" alt="Home Page" width="800">
 
 <h3>🛍️ Products Page</h3>
-<img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/ProductsPage.jpg?token=GHSAT0AAAAAACY4KQUFVMNX4Y3LGAZUZQHMZ5YTFYQ" alt="Products Page" width="800">
+<img src="[https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/ProductsPage.jpg?token=GHSAT0AAAAAACY4KQUFVMNX4Y3LGAZUZQHMZ5YTFYQ](https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/ProductsPage.jpg)" alt="Products Page" width="800">
 
 <h3>🛒 Cart Page (Login Required)</h3>
 <img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/CartPage.jpg?token=GHSAT0AAAAAACY4KQUEYN4LJWS7TYG25TE2Z5YTFQA" alt="Cart Page" width="800">
