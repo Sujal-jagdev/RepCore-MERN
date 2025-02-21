@@ -21,6 +21,7 @@ const Womens = () => {
     return <div className="text-center mt-5"><div className="spinner-border" role="status"></div></div>;
   }
   if (error || !products) {
+    console.log(error)
     return <div className="text-center mt-5 text-danger">Product not found!</div>;
   }
 
