@@ -44,8 +44,8 @@ module.exports.login = async (req, res) => {
                 let token = GenrateToken(user)
                 res.cookie("token", token,{
                     httpOnly: true,
-                    secure: true,  // ✅ Required for HTTPS
-                    sameSite: "none" // ✅ Important for cross-origin cookies
+                    secure: false,  // ✅ Required for HTTPS
+                    sameSite: "lax" // ✅ Important for cross-origin cookies
                   }).status(200).json({ message: "Welcome To RepCore...", user })
             } else {
                 return res.status(400).json({ message: "Invalid Email Or Password!!" })
@@ -61,8 +61,8 @@ module.exports.login = async (req, res) => {
 module.exports.logout = (req, res) => {
     res.cookie("token", "", {
         httpOnly: true,
-        secure: true,  // ✅ Required for HTTPS
-        sameSite: "none" // ✅ Important for cross-origin cookies
+        secure: false,  // ✅ Required for HTTPS
+        sameSite: "lax" // ✅ Important for cross-origin cookies
       }).status(200).json({ message: "You Are Logout" })
 }
 
