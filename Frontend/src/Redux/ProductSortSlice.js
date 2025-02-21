@@ -7,7 +7,7 @@ export const getData = createAsyncThunk("ProductSort/getData", async ({route,pag
         const res = await axios.get(`${API}/product/${route}?page=${page}&limit=12`);
         return res.data.products;
     } catch (error) {
-        console.log(error.message)
+        console.log(error)
     }
 })
 

@@ -11,7 +11,7 @@ const isLoggedIn = require("./Middlewares/isLoggedin")
 
 app.use(express.json())
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://rep-core.vercel.app/',
     credentials: true
 }))
 app.use(cookieParser())
