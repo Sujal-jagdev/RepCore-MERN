@@ -40,9 +40,8 @@ const AuthForm = () => {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    let data = { email: loginEmail, password: loginPassword }
     try {
-      await axios.post(`${API}/user/login`, data, { withCredentials: true });
+      await axios.post(`${API}/user/login`, { email: loginEmail, password: loginPassword }, { withCredentials: true });
       setpopuUp(true)
       navigate(`/profile`)
     } catch (error) {

@@ -49,7 +49,7 @@ module.exports.login = async (req, res) => {
 
         })
     } catch (error) {
-        res.status(400).json({ message: "Something Went Wrong!!", error })
+       return res.status(400).json({ message: "Something Went Wrong!!", error })
     }
 }
 
