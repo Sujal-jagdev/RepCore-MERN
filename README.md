@@ -31,7 +31,7 @@
 <h2>🖼️ Screenshots</h2>
 
 <h3>🏠 Home Page</h3>
-<img src="https://via.placeholder.com/800x400?text=Home+Page" alt="Home Page" width="800">
+<img src="" alt="Home Page" width="800">
 
 <h3>🛍️ Products Page</h3>
 <img src="https://via.placeholder.com/800x400?text=Products+Page" alt="Products Page" width="800">
@@ -49,6 +49,6 @@
 <ul>
   <li><b>Frontend:</b> React, Redux, Bootstrap</li>
   <li><b>Backend:</b> Node.js, Express, MongoDB</li>
-  <li><b>Authentication:</b> Firebase / JWT</li>
+  <li><b>Authentication:</b> Bcrypt, JWT</li>
   <li><b>Database:</b> MongoDB</li>
 </ul>
