@@ -31,7 +31,7 @@
 <h2>🖼️ Screenshots</h2>
 
 <h3>🏠 Home Page</h3>
-<img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/HomePage.jpg?token=GHSAT0AAAAAACY4KQUEFSQ3Y5XEUESDBZSWZ5YTFIA" alt="Home Page" width="800">
+<img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/HomePage.jpg" alt="Home Page" width="800">
 
 <h3>🛍️ Products Page</h3>
 <img src="https://raw.githubusercontent.com/Sujal-jagdev/RepCore-MERN/refs/heads/main/Images/ProductsPage.jpg?token=GHSAT0AAAAAACY4KQUFVMNX4Y3LGAZUZQHMZ5YTFYQ" alt="Products Page" width="800">
