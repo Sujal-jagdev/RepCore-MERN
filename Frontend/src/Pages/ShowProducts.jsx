@@ -3,13 +3,14 @@ import { MyContext } from "../Contexts/AllContext";
 import { LuPlus } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
 import axios from 'axios'
+import { API } from '../Contexts/AllContext'
 
 const ShowProducts = () => {
     const { product } = useContext(MyContext);
 
     const handleDeleteProduct = async (e) => {
         try {
-            await axios.delete(`http://localhost:3000/product/deleteproduct/${e._id}`, { withCredentials: true })
+            await axios.delete(`${API}/product/deleteproduct/${e._id}`, { withCredentials: true })
             alert("Product Deleted Successfully!!")
         } catch (error) {
             console.log(error)
@@ -44,7 +45,6 @@ const ShowProducts = () => {
                                 <h6 style={{ marginTop: "-8px" }}>${e.price}</h6>
                             </div>
                             <div className="col-4 text-end d-flex gap-3">
-                                <LuPlus className="fs-3 rounded-pill p-1" style={{ color: e.textColor, border: `1px solid ${e.textColor}`, cursor: 'pointer' }} />
                                 <MdDelete className="fs-3 rounded-pill p-1" style={{ color: e.textColor, border: `1px solid ${e.textColor}`, cursor: 'pointer' }} onClick={() => handleDeleteProduct(e)} />
                             </div>
                         </div>

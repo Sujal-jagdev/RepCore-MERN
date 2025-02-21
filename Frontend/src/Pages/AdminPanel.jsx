@@ -3,6 +3,7 @@ import ShowProducts from "./ShowProducts";
 import CreateProduct from "./CreateProduct";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API } from '../Contexts/AllContext'
 import { MyContext } from '../Contexts/AllContext';
 
 const AdminPanel = () => {
@@ -12,7 +13,7 @@ const AdminPanel = () => {
 
   const isAdmin = async () => {
     try {
-      let product = await axios.get("http://localhost:3000/product/allproducts", { withCredentials: true })
+      let product = await axios.get(`${API}/product/allproducts`, { withCredentials: true })
       setproduct(product.data.products)
     } catch (error) {
       navigate("/")

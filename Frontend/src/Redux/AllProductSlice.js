@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API } from "../Contexts/AllContext";
 
 export const GetallProduct = createAsyncThunk('AddToCart/GetAllProduct', async () => {
     try {
-        let res = await axios.get('http://localhost:3000/product/allproducts');
+        let res = await axios.get(`${API}/product/allproducts`);
         return res.data;
     } catch (error) {
         console.log(error)

@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
-import { GetallProduct } from "./AllProductSlice";
+import { API } from "../Contexts/AllContext";
 
 export const AddProductToCart = createAsyncThunk('AddToCart/AddProductToCart', async (id) => {
     try {
-        let res = await axios.post(`http://localhost:3000/product/addtocart/${id}`, {}, { withCredentials: true })
+        let res = await axios.post(`${API}/product/addtocart/${id}`, {}, { withCredentials: true })
         alert("Product Add SucessFully At Cart")
         return res.data;
     } catch (error) {
@@ -16,7 +16,7 @@ export const AddProductToCart = createAsyncThunk('AddToCart/AddProductToCart', a
 
 export const GetCartProduct = createAsyncThunk('AddToCart/GetCartProduct', async () => {
     try {
-        let res = await axios.get(`http://localhost:3000/user/profile`, { withCredentials: true });
+        let res = await axios.get(`${API}/user/profile`, { withCredentials: true });
         return res.data.user.cart;
     } catch (error) {
         Navigate('/login')
@@ -24,9 +24,9 @@ export const GetCartProduct = createAsyncThunk('AddToCart/GetCartProduct', async
     }
 })
 
-export const RemoveingCartProduct = createAsyncThunk('AddToCart/RemoveCartProduct', async (id)=>{
+export const RemoveingCartProduct = createAsyncThunk('AddToCart/RemoveCartProduct', async (id) => {
     try {
-       let res = await axios.post(`http://localhost:3000/product/user/removeproduct/${id}`, {}, { withCredentials: true })
+        let res = await axios.post(`${API}/product/user/removeproduct/${id}`, {}, { withCredentials: true })
         return res;
     } catch (error) {
         console.log(error)

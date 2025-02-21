@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API } from '../Contexts/AllContext';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const Profile = () => {
   // Authentication check
   const isAuth = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/user/profile`, { withCredentials: true });
+      const res = await axios.get(`${API}/user/profile`, { withCredentials: true });
       setUserData(res.data.user);
 
       const bufferData = res.data.user.userpicture.data;
@@ -31,7 +32,7 @@ const Profile = () => {
   // Logout function
   const handleLogout = async () => {
     try {
-      await axios.get(`http://localhost:3000/user/logout`, { withCredentials: true });
+      await axios.get(`${API}/user/logout`, { withCredentials: true });
       navigate('/login');
     } catch (error) {
       console.log(error);

@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IoSearchOutline } from "react-icons/io5";
-import { FaRegHeart } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa6";
 import { IoBagHandleOutline } from "react-icons/io5";
 import Logo from '../assets/Logo.png';

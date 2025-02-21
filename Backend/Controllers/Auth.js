@@ -20,7 +20,7 @@ module.exports.signup = (req, res) => {
             })
             //Set Token In Cookies
             let token = GenrateToken(user)
-            res.cookie("token", token).status(200).json({ message: "Welcome To RepCore...",user })
+            res.cookie("token", token).status(200).json({ message: "Welcome To RepCore...", user })
         })
     } catch (error) {
         res.status(400).json({ message: "Something Went Wrong!!", error })

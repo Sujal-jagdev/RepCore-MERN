@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
+import { API } from '../Contexts/AllContext';
 
 export const getData = createAsyncThunk("ProductSort/getData", async ({route,page}) => {
     try {
-        const res = await axios.get(`http://localhost:3000/product/${route}?page=${page}&limit=12`);
+        const res = await axios.get(`${API}/product/${route}?page=${page}&limit=12`);
         return res.data.products;
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
     }
 })
 

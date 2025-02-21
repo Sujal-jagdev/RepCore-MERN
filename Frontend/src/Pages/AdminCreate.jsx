@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { SiTicktick } from "react-icons/si";
 import { GoAlertFill } from "react-icons/go";
 import { useNavigate } from 'react-router-dom';
+import { API } from '../Contexts/AllContext'
 
 const AdminLogin = () => {
     const [fullname, setFullName] = useState('');
@@ -15,7 +16,7 @@ const AdminLogin = () => {
         e.preventDefault();
         // Handle the login logic here
         try {
-            let res = await axios.post('http://localhost:3000/owner/create', { fullname, email, password }, {withCredentials: true});
+            let res = await axios.post(`${API}/owner/create`, { fullname, email, password }, {withCredentials: true});
             setpopuUp(true)
             navigate("/adminpanel")
         } catch (error) {

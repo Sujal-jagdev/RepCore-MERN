@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { SiTicktick } from "react-icons/si";
 import { GoAlertFill } from "react-icons/go";
 import { useNavigate } from 'react-router-dom';
+import { API } from '../Contexts/AllContext';
 
 const AuthForm = () => {
   const [fullname, setFullName] = useState('');
@@ -28,7 +29,7 @@ const AuthForm = () => {
       formData.append("password", password);
       formData.append("contact", contact);
 
-      let response = await axios.post('http://localhost:3000/user/signup', formData, { withCredentials: true });
+      await axios.post(`${API}/user/signup`, formData, { withCredentials: true });
       setpopuUp(true)
       navigate(`/profile`)
     } catch (error) {
@@ -39,9 +40,9 @@ const AuthForm = () => {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    // Handle the login logic here
+    let data = { email: loginEmail, password: loginPassword }
     try {
-      let res = await axios.post('http://localhost:3000/user/login', { email: loginEmail, password: loginPassword }, { withCredentials: true });
+      await axios.post(`${API}/user/login`, data, { withCredentials: true });
       setpopuUp(true)
       navigate(`/profile`)
     } catch (error) {

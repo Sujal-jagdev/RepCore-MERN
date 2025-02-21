@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { SiTicktick } from "react-icons/si";
+import { API } from '../Contexts/AllContext'
 import { GoAlertFill } from "react-icons/go";
 
 const CreateProduct = () => {
@@ -20,13 +21,13 @@ const CreateProduct = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-            setProduct({ ...product, [name]: value });
+        setProduct({ ...product, [name]: value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:3000/product/create', product, { withCredentials: true })
+            await axios.post(`${API}/product/create`, product, { withCredentials: true })
             setpopuUp(true)
         } catch (error) {
             console.log(error)

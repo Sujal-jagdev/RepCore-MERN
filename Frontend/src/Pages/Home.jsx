@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom'
 import { categories, products, shopCategories, Swipper } from '../Components/Sections'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { FaFacebookF, FaPinterestP, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
-import Footer from '../Components/Footer';
 
 const Home = () => {
 

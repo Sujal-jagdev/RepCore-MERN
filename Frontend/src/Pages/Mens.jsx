@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import SideBar from './SideBar';
 import { useDispatch, useSelector } from "react-redux";
 import { getData, HLPrice, LHPrice } from '../Redux/ProductSortSlice';
 import { Link } from 'react-router-dom';
-import Sidebar from './SideBar';
-import Footer from '../Components/Footer';
+import Sidebar from './SideBar'
 
 const Mens = () => {
 
