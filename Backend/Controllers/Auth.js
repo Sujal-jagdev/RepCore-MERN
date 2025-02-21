@@ -45,7 +45,9 @@ module.exports.login = async (req, res) => {
                 res.cookie("token", token,{
                     httpOnly: true,
                     secure: true,  // ✅ Required for HTTPS
-                    sameSite: "none" // ✅ Important for cross-origin cookies
+                    sameSite: "none", // ✅ Important for cross-origin cookies
+                    path: "/", // ✅ Ensures cookie is accessible across the entire site
+                    domain: "https://repcore-mern.onrender.com" // ✅ Ensure correct domain
                   }).status(200).json({ message: "Welcome To RepCore...", user })
             } else {
                 return res.status(400).json({ message: "Invalid Email Or Password!!" })
