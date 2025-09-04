@@ -2,7 +2,10 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config()
 
 const isLoggedIn = (req, res, next) => {
-    const { token } = req.cookies;
+    // Check for token in cookies or Authorization header
+    const cookieToken = req.cookies.token;
+    const headerToken = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null;
+    const token = cookieToken || headerToken;
 
     if (!token) {
         return res.status(401).json({ message: "You Must Be Login First!!" })

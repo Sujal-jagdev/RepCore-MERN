@@ -1,0 +1,92 @@
+.admin-tab-header {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.admin-tab-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #f4f4f4;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-tab-button:hover {
+  background: #e0e0e0;
+}
+
+.admin-tab-button.active {
+  background: #555;
+  color: #fff;
+  font-weight: 500;
+}
+
+.admin-tab-content {
+  margin-top: 1rem;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.orders-table thead {
+  background: #f8f9fa;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.orders-table th {
+  font-weight: 600;
+  color: #444;
+}
+
+.orders-table tbody tr {
+  border-top: 1px solid #eee;
+  transition: background 0.2s ease;
+}
+
+.orders-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.orders-table td small {
+  color: #777;
+  font-size: 12px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge.success {
+  background: #e6f9f0;
+  color: #0a8f36;
+}
+
+.status-badge.warning {
+  background: #fff4e5;
+  color: #b76e00;
+}
+
+.status-badge.danger {
+  background: #fde8e8;
+  color: #c92a2a;
+}

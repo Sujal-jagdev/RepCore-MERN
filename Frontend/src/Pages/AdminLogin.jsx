@@ -2,69 +2,126 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { SiTicktick } from "react-icons/si";
 import { GoAlertFill } from "react-icons/go";
-import { useNavigate } from 'react-router-dom';
+import { FaLock, FaEnvelope, FaUserShield } from "react-icons/fa";
+import { Link, useNavigate } from 'react-router-dom';
 import { API } from '../Contexts/AllContext'
 
 const AdminLogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [popuUp, setpopuUp] = useState(null)
-    const navigate = useNavigate()
-
+    const [popuUp, setpopuUp] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleOwnerLoginSubmit = async (e) => {
         e.preventDefault();
-        // Handle the login logic here
+        setIsLoading(true);
+        setErrorMessage('');
+        
         try {
             let res = await axios.post(`${API}/owner/login`, { email, password }, { withCredentials: true });
-            setpopuUp(true)
-            navigate("/adminpanel")
+            setpopuUp(true);
+            setTimeout(() => {
+                navigate("/adminpanel");
+            }, 1000);
         } catch (error) {
-            navigate("/")
-            setpopuUp(false)
-
+            setpopuUp(false);
+            if (error.response && error.response.data && error.response.data.message) {
+                setErrorMessage(error.response.data.message);
+            } else {
+                setErrorMessage('Login failed. Please check your credentials.');
+            }
+        } finally {
+            setIsLoading(false);
         }
     };
+    
     return (
-        <div className="col-lg-5 col-md-6 col-sm-8 m-sm-auto col-12 pt-4">
-
-            {
-                popuUp ? <div className="alert alert-success d-flex align-items-center" role="alert">
-                    <svg className="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><SiTicktick className='fs-5' /></svg>
-                    <div>
-                        Admin Verification Successfull..
+        <div className="container py-5">
+            <div className="row justify-content-center">
+                <div className="col-lg-5 col-md-7 col-sm-9">
+                    <div className="card shadow-lg border-0 rounded-lg">
+                        <div className="card-header bg-primary text-white text-center py-4">
+                            <FaUserShield className="mb-2" size={40} />
+                            <h3 className="font-weight-bold mb-0">Admin Login</h3>
+                        </div>
+                        
+                        <div className="card-body p-4 p-md-5">
+                            {popuUp === true && (
+                                <div className="alert alert-success d-flex align-items-center" role="alert">
+                                    <SiTicktick className='fs-5 me-2' />
+                                    <div>Admin verification successful! Redirecting...</div>
+                                </div>
+                            )}
+                            
+                            {popuUp === false && (
+                                <div className="alert alert-danger d-flex align-items-center" role="alert">
+                                    <GoAlertFill className='fs-5 me-2' />
+                                    <div>{errorMessage || 'Admin authentication failed!'}</div>
+                                </div>
+                            )}
+                            
+                            <form onSubmit={handleOwnerLoginSubmit}>
+                                <div className="mb-4">
+                                    <label className="form-label">Email Address</label>
+                                    <div className="input-group">
+                                        <span className="input-group-text bg-light">
+                                            <FaEnvelope />
+                                        </span>
+                                        <input
+                                            type="email"
+                                            className="form-control py-2"
+                                            placeholder="Enter your email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                
+                                <div className="mb-4">
+                                    <label className="form-label">Password</label>
+                                    <div className="input-group">
+                                        <span className="input-group-text bg-light">
+                                            <FaLock />
+                                        </span>
+                                        <input
+                                            type="password"
+                                            className="form-control py-2"
+                                            placeholder="Enter your password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                
+                                <div className="d-grid">
+                                    <button 
+                                        type="submit" 
+                                        className="btn btn-primary py-2 fw-bold"
+                                        disabled={isLoading}
+                                    >
+                                        {isLoading ? (
+                                            <>
+                                                <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                                Logging in...
+                                            </>
+                                        ) : 'Login to Admin Panel'}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div className="card-footer text-center py-3 bg-light">
+                            <div className="small">
+                                <Link to="/" className="text-decoration-none">Return to main site</Link>
+                            </div>
+                        </div>
                     </div>
-                </div> : popuUp == null ? '' : <div class="alert alert-danger d-flex align-items-center" role="alert">
-                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><GoAlertFill className='fs-5' /></svg>
-                    <div>
-                        Admin Dosen't Exist!!
-                    </div>
                 </div>
-            }
-            <h3 className="form-title mt-5">Only Admin Login</h3>
-            <form onSubmit={handleOwnerLoginSubmit}>
-                <div className="mb-3">
-                    <input
-                        type="email"
-                        className="form-control"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <input
-                        type="password"
-                        className="form-control"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary w-100">Admin Login</button>
-            </form>
+            </div>
         </div>
     )
 }

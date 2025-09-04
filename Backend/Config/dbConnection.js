@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 require("dotenv").config()
 
-mongoose.connect(`${process.env.MONOSE_CONNECTTION}/RepCore`)
+mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Data Base Connected Succesfully'))
     .catch((err) => console.log(err))
 

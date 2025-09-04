@@ -3,34 +3,108 @@ import axios from 'axios';
 import { SiTicktick } from "react-icons/si";
 import { API } from '../Contexts/AllContext'
 import { GoAlertFill } from "react-icons/go";
+import { FaPlus, FaTrash } from "react-icons/fa";
 
 const CreateProduct = () => {
     const [popuUp, setpopuUp] = useState(null)
+    const [submitting, setSubmitting] = useState(false)
 
     const [product, setProduct] = useState({
         image: "",
+        gallery: [],
         name: "",
+        description: "",
         price: "",
+        mrp: "",
         discount: "",
         bgColor: "",
         category: "",
         subcategory: "",
+        colors: [],
+        sizes: [],
+        stock: "",
         panelColor: "",
         textColor: "",
     });
+    
+    const [newColor, setNewColor] = useState("");
+    const [newSize, setNewSize] = useState("");
+    const [newGalleryImage, setNewGalleryImage] = useState("");
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProduct({ ...product, [name]: value });
     };
+    
+    const addColor = () => {
+        if (newColor.trim() !== "") {
+            setProduct({
+                ...product,
+                colors: [...product.colors, newColor.trim()]
+            });
+            setNewColor("");
+        }
+    };
+    
+    const removeColor = (index) => {
+        const updatedColors = [...product.colors];
+        updatedColors.splice(index, 1);
+        setProduct({
+            ...product,
+            colors: updatedColors
+        });
+    };
+    
+    const addSize = () => {
+        if (newSize.trim() !== "") {
+            setProduct({
+                ...product,
+                sizes: [...product.sizes, newSize.trim()]
+            });
+            setNewSize("");
+        }
+    };
+    
+    const removeSize = (index) => {
+        const updatedSizes = [...product.sizes];
+        updatedSizes.splice(index, 1);
+        setProduct({
+            ...product,
+            sizes: updatedSizes
+        });
+    };
+    
+    const addGalleryImage = () => {
+        if (newGalleryImage.trim() !== "") {
+            setProduct({
+                ...product,
+                gallery: [...product.gallery, newGalleryImage.trim()]
+            });
+            setNewGalleryImage("");
+        }
+    };
+    
+    const removeGalleryImage = (index) => {
+        const updatedGallery = [...product.gallery];
+        updatedGallery.splice(index, 1);
+        setProduct({
+            ...product,
+            gallery: updatedGallery
+        });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            if (submitting) return;
+            setSubmitting(true)
             await axios.post(`${API}/product/create`, product, { withCredentials: true })
             setpopuUp(true)
         } catch (error) {
             console.log(error)
+            setpopuUp(false)
+        } finally {
+            setSubmitting(false)
         }
     };
 
@@ -54,23 +128,65 @@ const CreateProduct = () => {
                 {/* Product Image */}
                 <div className="mb-3">
                     <label htmlFor="image" className="form-label">
-                        Product Image
+                        Main Product Image URL <span className="text-danger">*</span>
                     </label>
                     <input
                         type="text"
                         className="form-control"
                         id="image"
                         name="image"
+                        value={product.image}
                         onChange={handleChange}
-                        placeholder="Enter product ImageURL"
+                        placeholder="Enter main product image URL"
+                        required
                     />
                 </div>
+                
+                {/* Gallery Images */}
+                <div className="mb-3">
+                    <label className="form-label">Gallery Images</label>
+                    <div className="input-group mb-2">
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={newGalleryImage}
+                            onChange={(e) => setNewGalleryImage(e.target.value)}
+                            placeholder="Enter gallery image URL"
+                        />
+                        <button 
+                            type="button" 
+                            className="btn btn-outline-primary" 
+                            onClick={addGalleryImage}
+                        >
+                            <FaPlus />
+                        </button>
+                    </div>
+                    {product.gallery.length > 0 && (
+                        <div className="mt-2">
+                            <p className="mb-1">Added Gallery Images:</p>
+                            <ul className="list-group">
+                                {product.gallery.map((img, index) => (
+                                    <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                                        <span className="text-truncate" style={{maxWidth: "80%"}}>{img}</span>
+                                        <button 
+                                            type="button" 
+                                            className="btn btn-sm btn-danger" 
+                                            onClick={() => removeGalleryImage(index)}
+                                        >
+                                            <FaTrash />
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}                    
+                </div>
 
-                {/* Product Name and Price */}
+                {/* Product Name and Description */}
                 <div className="row">
                     <div className="col-md-6 mb-3">
                         <label htmlFor="name" className="form-label">
-                            Product Name
+                            Product Name <span className="text-danger">*</span>
                         </label>
                         <input
                             type="text"
@@ -80,79 +196,226 @@ const CreateProduct = () => {
                             value={product.name}
                             onChange={handleChange}
                             placeholder="Enter product name"
+                            required
                         />
                     </div>
                     <div className="col-md-6 mb-3">
+                        <label htmlFor="description" className="form-label">
+                            Product Description <span className="text-danger">*</span>
+                        </label>
+                        <textarea
+                            className="form-control"
+                            id="description"
+                            name="description"
+                            value={product.description}
+                            onChange={handleChange}
+                            placeholder="Enter product description"
+                            rows="3"
+                            required
+                        ></textarea>
+                    </div>
+                </div>
+                
+                {/* Product Price Details */}
+                <div className="row">
+                    <div className="col-md-4 mb-3">
                         <label htmlFor="price" className="form-label">
-                            Product Price
+                            Selling Price <span className="text-danger">*</span>
                         </label>
                         <input
-                            type="text"
+                            type="number"
                             className="form-control"
                             id="price"
                             name="price"
                             value={product.price}
                             onChange={handleChange}
-                            placeholder="Enter product price"
+                            placeholder="Enter selling price"
+                            required
                         />
                     </div>
-                </div>
-
-                <div className=" row">
-                    {/* Discount Price */}
-                    <div className="mb-3 col-md-6">
-                        <label htmlFor="discount" className="form-label">
-                            Discount Price
+                    <div className="col-md-4 mb-3">
+                        <label htmlFor="mrp" className="form-label">
+                            MRP
                         </label>
                         <input
-                            type="text"
+                            type="number"
+                            className="form-control"
+                            id="mrp"
+                            name="mrp"
+                            value={product.mrp}
+                            onChange={handleChange}
+                            placeholder="Enter MRP (if different from price)"
+                        />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                        <label htmlFor="discount" className="form-label">
+                            Discount (%)
+                        </label>
+                        <input
+                            type="number"
                             className="form-control"
                             id="discount"
                             name="discount"
                             value={product.discount}
                             onChange={handleChange}
-                            placeholder="Enter discount price"
+                            placeholder="Enter discount percentage"
                         />
                     </div>
+                </div>
 
-                    {/* Product Category */}
+                {/* Product Category and Subcategory */}
+                <div className="row">
                     <div className="mb-3 col-md-6">
                         <label htmlFor="category" className="form-label">
-                            Product Category
+                            Product Category <span className="text-danger">*</span>
                         </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="category"
-                            name="category"
-                            value={product.category}
+                        <select 
+                            className="form-control" 
+                            id="category" 
+                            name="category" 
+                            value={product.category} 
                             onChange={handleChange}
-                            placeholder="Enter Product Category"
-                        />
+                            required
+                        >
+                            <option value="" className="fw-bold">Select Product Category</option>
+                            <option value="Men" className="fw-bold">Men</option>
+                            <option value="Women" className="fw-bold">Women</option>
+                            <option value="Accessories" className="fw-bold">Accessories</option>
+                        </select>
                     </div>
 
                     <div className="mb-3 col-md-6">
                         <label htmlFor="subcategory" className="form-label">
                             Product Sub Category
                         </label>
-                        <br />
-                        <select name="subcategory" onChange={handleChange} id="subcategory" value={product.subcategory} className="form-control col-12 p-2 fw-bold">
-                            <option value="" className="fw-bold">Enter Product Sub Category</option>
-                            <option value="Leggings" className="fw-bold">Leggings</option>
-                            <option value="Short Leggings" className="fw-bold">Short Leggings</option>
-                            <option value="Women Joggers" className="fw-bold">Women Joggers</option>
-                            <option value="Women Hoodie" className="fw-bold">Women Hoodie</option>
-                            <option value="Bras" className="fw-bold">Bras</option>
-                            <option value="Men Shorts" className="fw-bold">Men Shorts</option>
-                            <option value="Men Joggers" className="fw-bold">Men Joggers</option>
-                            <option value="T-shirt" className="fw-bold">T-shirt</option>
-                            <option value="Men Hoodie" className="fw-bold">Men Hoodie</option>
-                            <option value="Socks" className="fw-bold">Socks</option>
-                            <option value="Bags" className="fw-bold">Bags</option>
-                            <option value="Straps" className="fw-bold">Straps</option>
-                            <option value="Bottle" className="fw-bold">Bottle</option>
-                            <option value="Cap" className="fw-bold">Cap</option>
+                        <select 
+                            name="subcategory" 
+                            onChange={handleChange} 
+                            id="subcategory" 
+                            value={product.subcategory} 
+                            className="form-control p-2"
+                        >
+                            <option value="" className="fw-bold">Select Product Sub Category</option>
+                            {product.category === "Women" && (
+                                <>
+                                    <option value="Leggings">Leggings</option>
+                                    <option value="Short Leggings">Short Leggings</option>
+                                    <option value="Women Joggers">Women Joggers</option>
+                                    <option value="Women Hoodie">Women Hoodie</option>
+                                    <option value="Bras">Bras</option>
+                                </>
+                            )}
+                            {product.category === "Men" && (
+                                <>
+                                    <option value="Men Shorts">Men Shorts</option>
+                                    <option value="Men Joggers">Men Joggers</option>
+                                    <option value="T-shirt">T-shirt</option>
+                                    <option value="Men Hoodie">Men Hoodie</option>
+                                </>
+                            )}
+                            {product.category === "Accessories" && (
+                                <>
+                                    <option value="Socks">Socks</option>
+                                    <option value="Bags">Bags</option>
+                                    <option value="Straps">Straps</option>
+                                    <option value="Bottle">Bottle</option>
+                                    <option value="Cap">Cap</option>
+                                </>
+                            )}
                         </select>
+                    </div>
+                </div>
+                
+                {/* Inventory Details */}
+                <h5 className="mb-3">Inventory Details</h5>
+                <div className="row">
+                    <div className="col-md-4 mb-3">
+                        <label htmlFor="stock" className="form-label">
+                            Stock Quantity
+                        </label>
+                        <input
+                            type="number"
+                            className="form-control"
+                            id="stock"
+                            name="stock"
+                            value={product.stock}
+                            onChange={handleChange}
+                            placeholder="Enter available stock"
+                        />
+                    </div>
+                    
+                    {/* Colors */}
+                    <div className="col-md-4 mb-3">
+                        <label className="form-label">Available Colors</label>
+                        <div className="input-group mb-2">
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={newColor}
+                                onChange={(e) => setNewColor(e.target.value)}
+                                placeholder="Enter color name"
+                            />
+                            <button 
+                                type="button" 
+                                className="btn btn-outline-primary" 
+                                onClick={addColor}
+                            >
+                                <FaPlus />
+                            </button>
+                        </div>
+                        {product.colors.length > 0 && (
+                            <div className="d-flex flex-wrap gap-2 mt-2">
+                                {product.colors.map((color, index) => (
+                                    <div key={index} className="badge bg-light text-dark d-flex align-items-center p-2">
+                                        {color}
+                                        <button 
+                                            type="button" 
+                                            className="btn btn-sm text-danger ms-2 p-0" 
+                                            onClick={() => removeColor(index)}
+                                        >
+                                            <FaTrash size={12} />
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    
+                    {/* Sizes */}
+                    <div className="col-md-4 mb-3">
+                        <label className="form-label">Available Sizes</label>
+                        <div className="input-group mb-2">
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={newSize}
+                                onChange={(e) => setNewSize(e.target.value)}
+                                placeholder="Enter size (e.g., S, M, L)"
+                            />
+                            <button 
+                                type="button" 
+                                className="btn btn-outline-primary" 
+                                onClick={addSize}
+                            >
+                                <FaPlus />
+                            </button>
+                        </div>
+                        {product.sizes.length > 0 && (
+                            <div className="d-flex flex-wrap gap-2 mt-2">
+                                {product.sizes.map((size, index) => (
+                                    <div key={index} className="badge bg-light text-dark d-flex align-items-center p-2">
+                                        {size}
+                                        <button 
+                                            type="button" 
+                                            className="btn btn-sm text-danger ms-2 p-0" 
+                                            onClick={() => removeSize(index)}
+                                        >
+                                            <FaTrash size={12} />
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -204,8 +467,8 @@ const CreateProduct = () => {
                 </div>
 
                 {/* Submit Button */}
-                <button type="submit" className="btn btn-primary">
-                    Create New Product
+                <button type="submit" className="btn btn-primary" disabled={submitting}>
+                    {submitting ? 'Creating...' : 'Create New Product'}
                 </button>
             </form>
         </div>

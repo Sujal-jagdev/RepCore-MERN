@@ -1,0 +1,124 @@
+/* ProductDetail.css */
+
+/* Product Gallery Styles */
+.gallery-item {
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+    border-color: #0d6efd !important;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.1);
+}
+
+/* Product Info Styles */
+.product-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.product-options {
+    transition: all 0.3s ease;
+}
+
+.product-options:hover {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+}
+
+.size-option:hover {
+    transform: translateY(-3px);
+}
+
+/* Action Buttons */
+.action-buttons .btn {
+    transition: all 0.3s ease;
+}
+
+.action-buttons .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Product Card Styles */
+.product-card {
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.product-img-link {
+    overflow: hidden;
+    display: block;
+}
+
+.product-img-link img:hover {
+    transform: scale(1.05);
+}
+
+.product-actions {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-card:hover .product-actions {
+    opacity: 1;
+}
+
+/* Tab Styles */
+.nav-pills .nav-link {
+    color: #495057;
+    font-weight: 500;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Review Styles */
+.review-item {
+    transition: all 0.3s ease;
+}
+
+.review-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1) !important;
+}
+
+.star-rating i {
+    transition: all 0.2s ease;
+}
+
+.star-rating i:hover {
+    transform: scale(1.2);
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .main-image img {
+        height: 300px !important;
+    }
+    
+    .gallery-item img {
+        height: 60px !important;
+    }
+    
+    .product-meta {
+        flex-direction: column;
+    }
+    
+    .product-meta > div {
+        margin-bottom: 0.5rem;
+    }
+}
