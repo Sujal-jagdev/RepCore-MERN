@@ -7,7 +7,7 @@ export const categories = [
 export const products = [
   { img: "https://cdn.shopify.com/s/files/1/0156/6146/products/MeshTruckerBlackI2A3P-BBBB.93_1664x.jpg?v=1666898603", alt: "Cap" },
   { img: "https://cdn.shopify.com/s/files/1/0156/6146/products/1LWaterBottleBlack-I2A6T-BBBB20_1664x.jpg?v=1673514746", alt: "Bottle" },
-  { img: "https://cdn.shopify.com/s/files/1/0156/6146/products/EverydayMiniBackpackBlack-I3A1X-BBBB43_1664x.jpg?v=1673514740", alt: "Backpack" },
+  { img: "https://cdn.shopify.com/s/files/1/0156/6146/files/6_8dc6068a-6af1-41ad-8131-dc9d80ccabba.jpg?v=1740563119", alt: "Backpack" },
 ];
 
 export const shopCategories = [

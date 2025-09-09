@@ -26,16 +26,47 @@ const CreateProduct = () => {
         panelColor: "",
         textColor: "",
     });
-    
+
     const [newColor, setNewColor] = useState("");
     const [newSize, setNewSize] = useState("");
     const [newGalleryImage, setNewGalleryImage] = useState("");
+
+    const mens_product = [
+        "T-shirts",
+        "Tank Tops",
+        "Hoodies & Sweatshirts",
+        "Shorts",
+        "Joggers",
+        "Compression Wear",
+        "Jackets",
+        "Gym Bags",
+        "Gloves",
+        "Belts",
+        "Straps & Wraps",
+        "Socks",
+        "Caps",
+        "Bottles & Shakers"
+    ]
+
+    const accessories = [
+        "Gym Gloves",
+        "Weight Lifting Belt",
+        "Wrist Wraps",
+        "Resistance Bands",
+        "Shaker Bottle",
+        "Gym Bag",
+        "Foam Roller",
+        "Jump Rope",
+        "Water Bottle",
+        "Smartwatch/Fitness Tracker"
+    ]
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProduct({ ...product, [name]: value });
     };
-    
+
     const addColor = () => {
         if (newColor.trim() !== "") {
             setProduct({
@@ -45,7 +76,7 @@ const CreateProduct = () => {
             setNewColor("");
         }
     };
-    
+
     const removeColor = (index) => {
         const updatedColors = [...product.colors];
         updatedColors.splice(index, 1);
@@ -54,7 +85,7 @@ const CreateProduct = () => {
             colors: updatedColors
         });
     };
-    
+
     const addSize = () => {
         if (newSize.trim() !== "") {
             setProduct({
@@ -64,7 +95,7 @@ const CreateProduct = () => {
             setNewSize("");
         }
     };
-    
+
     const removeSize = (index) => {
         const updatedSizes = [...product.sizes];
         updatedSizes.splice(index, 1);
@@ -73,7 +104,7 @@ const CreateProduct = () => {
             sizes: updatedSizes
         });
     };
-    
+
     const addGalleryImage = () => {
         if (newGalleryImage.trim() !== "") {
             setProduct({
@@ -83,7 +114,7 @@ const CreateProduct = () => {
             setNewGalleryImage("");
         }
     };
-    
+
     const removeGalleryImage = (index) => {
         const updatedGallery = [...product.gallery];
         updatedGallery.splice(index, 1);
@@ -141,7 +172,7 @@ const CreateProduct = () => {
                         required
                     />
                 </div>
-                
+
                 {/* Gallery Images */}
                 <div className="mb-3">
                     <label className="form-label">Gallery Images</label>
@@ -153,9 +184,9 @@ const CreateProduct = () => {
                             onChange={(e) => setNewGalleryImage(e.target.value)}
                             placeholder="Enter gallery image URL"
                         />
-                        <button 
-                            type="button" 
-                            className="btn btn-outline-primary" 
+                        <button
+                            type="button"
+                            className="btn btn-outline-primary"
                             onClick={addGalleryImage}
                         >
                             <FaPlus />
@@ -167,10 +198,10 @@ const CreateProduct = () => {
                             <ul className="list-group">
                                 {product.gallery.map((img, index) => (
                                     <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                                        <span className="text-truncate" style={{maxWidth: "80%"}}>{img}</span>
-                                        <button 
-                                            type="button" 
-                                            className="btn btn-sm btn-danger" 
+                                        <span className="text-truncate" style={{ maxWidth: "80%" }}>{img}</span>
+                                        <button
+                                            type="button"
+                                            className="btn btn-sm btn-danger"
                                             onClick={() => removeGalleryImage(index)}
                                         >
                                             <FaTrash />
@@ -179,7 +210,7 @@ const CreateProduct = () => {
                                 ))}
                             </ul>
                         </div>
-                    )}                    
+                    )}
                 </div>
 
                 {/* Product Name and Description */}
@@ -215,7 +246,7 @@ const CreateProduct = () => {
                         ></textarea>
                     </div>
                 </div>
-                
+
                 {/* Product Price Details */}
                 <div className="row">
                     <div className="col-md-4 mb-3">
@@ -269,11 +300,11 @@ const CreateProduct = () => {
                         <label htmlFor="category" className="form-label">
                             Product Category <span className="text-danger">*</span>
                         </label>
-                        <select 
-                            className="form-control" 
-                            id="category" 
-                            name="category" 
-                            value={product.category} 
+                        <select
+                            className="form-control"
+                            id="category"
+                            name="category"
+                            value={product.category}
                             onChange={handleChange}
                             required
                         >
@@ -288,11 +319,11 @@ const CreateProduct = () => {
                         <label htmlFor="subcategory" className="form-label">
                             Product Sub Category
                         </label>
-                        <select 
-                            name="subcategory" 
-                            onChange={handleChange} 
-                            id="subcategory" 
-                            value={product.subcategory} 
+                        <select
+                            name="subcategory"
+                            onChange={handleChange}
+                            id="subcategory"
+                            value={product.subcategory}
                             className="form-control p-2"
                         >
                             <option value="" className="fw-bold">Select Product Sub Category</option>
@@ -307,25 +338,30 @@ const CreateProduct = () => {
                             )}
                             {product.category === "Men" && (
                                 <>
-                                    <option value="Men Shorts">Men Shorts</option>
-                                    <option value="Men Joggers">Men Joggers</option>
-                                    <option value="T-shirt">T-shirt</option>
-                                    <option value="Men Hoodie">Men Hoodie</option>
+                                    {
+                                        mens_product.map((e) => (
+                                            <>
+                                                <option value={e}>{e}</option>
+                                            </>
+                                        ))
+                                    }
                                 </>
                             )}
                             {product.category === "Accessories" && (
                                 <>
-                                    <option value="Socks">Socks</option>
-                                    <option value="Bags">Bags</option>
-                                    <option value="Straps">Straps</option>
-                                    <option value="Bottle">Bottle</option>
-                                    <option value="Cap">Cap</option>
+                                    {
+                                        accessories.map((e) => (
+                                            <>
+                                                <option value={e}>{e}</option>
+                                            </>
+                                        ))
+                                    }
                                 </>
                             )}
                         </select>
                     </div>
                 </div>
-                
+
                 {/* Inventory Details */}
                 <h5 className="mb-3">Inventory Details</h5>
                 <div className="row">
@@ -343,7 +379,7 @@ const CreateProduct = () => {
                             placeholder="Enter available stock"
                         />
                     </div>
-                    
+
                     {/* Colors */}
                     <div className="col-md-4 mb-3">
                         <label className="form-label">Available Colors</label>
@@ -355,9 +391,9 @@ const CreateProduct = () => {
                                 onChange={(e) => setNewColor(e.target.value)}
                                 placeholder="Enter color name"
                             />
-                            <button 
-                                type="button" 
-                                className="btn btn-outline-primary" 
+                            <button
+                                type="button"
+                                className="btn btn-outline-primary"
                                 onClick={addColor}
                             >
                                 <FaPlus />
@@ -368,9 +404,9 @@ const CreateProduct = () => {
                                 {product.colors.map((color, index) => (
                                     <div key={index} className="badge bg-light text-dark d-flex align-items-center p-2">
                                         {color}
-                                        <button 
-                                            type="button" 
-                                            className="btn btn-sm text-danger ms-2 p-0" 
+                                        <button
+                                            type="button"
+                                            className="btn btn-sm text-danger ms-2 p-0"
                                             onClick={() => removeColor(index)}
                                         >
                                             <FaTrash size={12} />
@@ -380,7 +416,7 @@ const CreateProduct = () => {
                             </div>
                         )}
                     </div>
-                    
+
                     {/* Sizes */}
                     <div className="col-md-4 mb-3">
                         <label className="form-label">Available Sizes</label>
@@ -392,9 +428,9 @@ const CreateProduct = () => {
                                 onChange={(e) => setNewSize(e.target.value)}
                                 placeholder="Enter size (e.g., S, M, L)"
                             />
-                            <button 
-                                type="button" 
-                                className="btn btn-outline-primary" 
+                            <button
+                                type="button"
+                                className="btn btn-outline-primary"
                                 onClick={addSize}
                             >
                                 <FaPlus />
@@ -405,9 +441,9 @@ const CreateProduct = () => {
                                 {product.sizes.map((size, index) => (
                                     <div key={index} className="badge bg-light text-dark d-flex align-items-center p-2">
                                         {size}
-                                        <button 
-                                            type="button" 
-                                            className="btn btn-sm text-danger ms-2 p-0" 
+                                        <button
+                                            type="button"
+                                            className="btn btn-sm text-danger ms-2 p-0"
                                             onClick={() => removeSize(index)}
                                         >
                                             <FaTrash size={12} />

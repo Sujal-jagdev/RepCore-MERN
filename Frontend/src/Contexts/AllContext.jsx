@@ -4,7 +4,7 @@ import axios from 'axios';
 export const MyContext = createContext();
 export const AuthContext = createContext();
 export const CartContext = createContext();
-export const API = `http://localhost:3000`;
+export const API = import.meta.env.VITE_API_URL;
 
 export const useAuth = () => {
   return useContext(AuthContext);

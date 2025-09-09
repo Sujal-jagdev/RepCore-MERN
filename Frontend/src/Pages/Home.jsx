@@ -86,9 +86,9 @@ const Home = () => {
 
       {/* Enhanced Category Section */}
       <section className="category-section container-lg">
-        <div>
+        <div className='p-lg-0 p-md-0 p-sm-0 p-2'>
           <div className="section-header">
-            <h2 className="section-title">THE PERFECT GEAR FOR EVERY WORKOUT</h2>
+            <h2 className="section-title ">THE PERFECT GEAR FOR EVERY WORKOUT</h2>
             <p className="section-subtitle">Discover our premium collection designed for peak performance</p>
           </div>
           <div className="row g-4">
@@ -115,7 +115,7 @@ const Home = () => {
       </section>
 
       {/* Enhanced Recommendation Section */}
-      <section className="recommendation-section p-5">
+      <section className="recommendation-section p-lg-5 p-md-5 p-sm-4 p-2">
         <div>
           <div className="row align-items-center">
             <div className="col-lg-6 mb-4 mb-lg-0">
@@ -135,7 +135,7 @@ const Home = () => {
                     <div className="product-image-container" style={{ height: "100%" }}>
                       <img src={product.img} alt={product.alt} className="product-image" />
                       <div className="product-overlay">
-                        <button className="quick-view-btn">Quick View</button>
+                        <button className="quick-view-btn"><Link to={"/accessories"} className=' text-dark '>Quick View</Link></button>
                       </div>
                     </div>
                   </div>
@@ -262,7 +262,7 @@ const Home = () => {
 
       {/* Enhanced Shop Categories Section */}
       <section className="shop-categories-section container-lg">
-        <div >
+        <div className='p-lg-0 p-md-0 p-sm-0 p-2'>
           <div className="section-header text-center">
             <h2 className="section-title">SHOP BY CATEGORY</h2>
             <p className="section-subtitle">Find the perfect gear for your fitness journey</p>

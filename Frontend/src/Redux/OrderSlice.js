@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API } from "../Contexts/AllContext";
 
 // 1) Thunk for fetching orders
 export const fetchOrders = createAsyncThunk(
     "orders/fetchOrders",
     async (_, { rejectWithValue }) => {
         try {
-            const response = await axios.get("http://localhost:3000/order/", {
+            const response = await axios.get(`${API}/order/`, {
                 withCredentials: true, 
             });
 
