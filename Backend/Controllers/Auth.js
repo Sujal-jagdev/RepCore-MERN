@@ -15,12 +15,16 @@ const generateOTP = () => {
 
 // Configure nodemailer
 const transporter = nodemailer.createTransport({
-    service: process.env.EMAIL_SERVICE || 'gmail',
+    service: process.env.EMAIL_SERVICE || "gmail",
     auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD
-    }
+        pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+        rejectUnauthorized: false, // localhost/test ke liye
+    },
 });
+
 
 // Send verification email
 const sendVerificationEmail = async (email, otp) => {
@@ -66,10 +70,10 @@ module.exports.signup = async (req, res) => {
 
         // Create user with verification pending
         const user = await userModel.create({
-            fullname, 
-            email, 
-            password: hash, 
-            contact, 
+            fullname,
+            email,
+            password: hash,
+            contact,
             userpicture: req.file ? req.file.buffer : undefined,
             isVerified: false,
             verificationOTP: {
@@ -81,9 +85,9 @@ module.exports.signup = async (req, res) => {
         // Send verification email
         await sendVerificationEmail(email, otp);
 
-        res.status(201).json({ 
-            message: "Registration successful! Please check your email for verification code.", 
-            userId: user._id 
+        res.status(201).json({
+            message: "Registration successful! Please check your email for verification code.",
+            userId: user._id
         });
     } catch (error) {
         console.error("Signup error:", error);
@@ -121,7 +125,7 @@ module.exports.verifyOTP = async (req, res) => {
         await user.save();
 
         // Just return success message, don't log in automatically
-        res.status(200).json({ 
+        res.status(200).json({
             message: "Email verified successfully! Please login to continue."
         });
     } catch (error) {
@@ -179,7 +183,7 @@ module.exports.login = async (req, res) => {
 
         // Check if user is verified
         if (!user.isVerified) {
-            return res.status(403).json({ 
+            return res.status(403).json({
                 message: "Email not verified. Please verify your email first.",
                 needsVerification: true,
                 userId: user._id
@@ -193,16 +197,16 @@ module.exports.login = async (req, res) => {
             await user.save();
 
             const token = GenrateToken(user);
-            
+
             // Log token generation for debugging
             console.log('Generated token for user:', user.email);
-            
+
             res.cookie("token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-            }).status(200).json({ 
-                message: "Welcome back to RepCore!", 
+            }).status(200).json({
+                message: "Welcome back to RepCore!",
                 token: token, // Include token in response
                 user: {
                     _id: user._id,
@@ -210,14 +214,14 @@ module.exports.login = async (req, res) => {
                     email: user.email,
                     contact: user.contact,
                     isAuthenticated: true
-                } 
+                }
             });
         } else {
             return res.status(400).json({ message: "Invalid Email Or Password!" })
         }
     } catch (error) {
-       console.error("Login error:", error);
-       return res.status(500).json({ message: "Something went wrong during login", error: error.message })
+        console.error("Login error:", error);
+        return res.status(500).json({ message: "Something went wrong during login", error: error.message })
     }
 }
 
@@ -236,7 +240,7 @@ module.exports.profile = async (req, res) => {
         const user = await userModel.findOne({ email: req.user.email })
             .select('-password -verificationOTP')
             .populate('wishlist', 'name image price discount');
-            
+
         if (!user) {
             return res.status(404).json({ message: "User not found" })
         }
@@ -250,75 +254,80 @@ module.exports.profile = async (req, res) => {
 // Forgot password - send reset email
 module.exports.forgotPassword = async (req, res) => {
     const { email } = req.body;
-    
+
     try {
+        // 1. User check karo
         const user = await userModel.findOne({ email });
-        
         if (!user) {
             return res.status(404).json({ message: "No account found with this email" });
         }
-        
-        // Generate reset token
-        const resetToken = crypto.randomBytes(32).toString('hex');
-        const resetTokenExpiry = new Date();
-        resetTokenExpiry.setHours(resetTokenExpiry.getHours() + 1); // Token valid for 1 hour
-        
-        // Save token to user
+
+        // 2. Token generate karo
+        const resetToken = crypto.randomBytes(32).toString("hex");
+        const resetTokenExpiry = Date.now() + 3600000; // 1 hour
+
+        // 3. User document update karo
         user.resetPasswordToken = resetToken;
         user.resetPasswordExpires = resetTokenExpiry;
         await user.save();
-        
-        // Send reset email
+
+        // 4. Reset URL banao
         const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+
+        // 5. Mail options
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: email,
-            subject: 'RepCore - Password Reset',
+            subject: "RepCore - Password Reset",
             html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
-                    <h2 style="color: #333;">Reset Your Password</h2>
-                    <p>You requested a password reset for your RepCore account. Click the button below to reset your password:</p>
-                    <div style="text-align: center; margin: 30px 0;">
-                        <a href="${resetUrl}" style="background-color: #4CAF50; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Reset Password</a>
-                    </div>
-                    <p>This link is valid for 1 hour. If you didn't request this reset, please ignore this email.</p>
-                    <p>Best regards,<br>The RepCore Team</p>
-                </div>
-            `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
+          <h2 style="color: #333;">Reset Your Password</h2>
+          <p>You requested a password reset for your RepCore account. Click the button below to reset your password:</p>
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${resetUrl}" style="background-color: #000; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Reset Password</a>
+          </div>
+          <p>This link is valid for 1 hour. If you didn't request this reset, please ignore this email.</p>
+          <p>Best regards,<br>The RepCore Team</p>
+        </div>
+      `
         };
-        
+
+        // 6. Email send karo
         await transporter.sendMail(mailOptions);
-        
+
+        // 7. Response
         res.status(200).json({ message: "Password reset instructions sent to your email" });
     } catch (error) {
         console.error("Forgot password error:", error);
         res.status(500).json({ message: "Something went wrong", error: error.message });
     }
-}
+};
 
 // Reset password with token
 module.exports.resetPassword = async (req, res) => {
     const { token, newPassword } = req.body;
-    
+
     try {
         const user = await userModel.findOne({
             resetPasswordToken: token,
             resetPasswordExpires: { $gt: Date.now() }
         });
-        
+
+        console.log(user)
+
         if (!user) {
             return res.status(400).json({ message: "Invalid or expired reset token" });
         }
-        
+
         // Hash new password
         const hash = await bcrypt.hash(newPassword, 10);
-        
+
         // Update user password and clear reset token
         user.password = hash;
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
         await user.save();
-        
+
         res.status(200).json({ message: "Password reset successful. You can now log in with your new password." });
     } catch (error) {
         console.error("Reset password error:", error);
@@ -329,21 +338,21 @@ module.exports.resetPassword = async (req, res) => {
 // Update user profile
 module.exports.updateProfile = async (req, res) => {
     const { fullname, contact, address } = req.body;
-    
+
     try {
         const user = await userModel.findById(req.user.id);
-        
+
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
-        
+
         // Update fields
         if (fullname) user.fullname = fullname;
         if (contact) user.contact = contact;
         if (address) {
             // If user doesn't have an address field yet, initialize it
             if (!user.address) user.address = {};
-            
+
             // Update address fields
             if (address.street !== undefined) user.address.street = address.street;
             if (address.city !== undefined) user.address.city = address.city;
@@ -352,10 +361,10 @@ module.exports.updateProfile = async (req, res) => {
             if (address.country !== undefined) user.address.country = address.country;
         }
         if (req.file) user.userpicture = req.file.buffer;
-        
+
         await user.save();
-        
-        res.status(200).json({ 
+
+        res.status(200).json({
             message: "Profile updated successfully",
             user: {
                 _id: user._id,

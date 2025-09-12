@@ -61,6 +61,19 @@ const CreateProduct = () => {
         "Smartwatch/Fitness Tracker"
     ]
 
+    const womens_product = [
+        "Sports Bra",
+        "Leggings",
+        "Gym Gloves",
+        "Resistance Bands",
+        "Yoga Mat",
+        "Shaker Bottle",
+        "Foam Roller",
+        "Headbands/Hairbands",
+        "Water Bottle",
+        "Gym Bag"
+    ]
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -329,11 +342,13 @@ const CreateProduct = () => {
                             <option value="" className="fw-bold">Select Product Sub Category</option>
                             {product.category === "Women" && (
                                 <>
-                                    <option value="Leggings">Leggings</option>
-                                    <option value="Short Leggings">Short Leggings</option>
-                                    <option value="Women Joggers">Women Joggers</option>
-                                    <option value="Women Hoodie">Women Hoodie</option>
-                                    <option value="Bras">Bras</option>
+                                    {
+                                        womens_product.map((e) => (
+                                            <>
+                                                <option value={e}>{e}</option>
+                                            </>
+                                        ))
+                                    }
                                 </>
                             )}
                             {product.category === "Men" && (

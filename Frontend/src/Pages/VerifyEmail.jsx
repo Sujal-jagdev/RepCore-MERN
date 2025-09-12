@@ -12,21 +12,21 @@ const VerifyEmail = () => {
     const [status, setStatus] = useState(null); // null, 'success', 'error'
     const [message, setMessage] = useState('');
     const [countdown, setCountdown] = useState(0);
-    
+
     const location = useLocation();
     const navigate = useNavigate();
-    
+
     // Get email and userId from location state
     const email = location.state?.email;
     const userId = location.state?.userId;
-    
+
     useEffect(() => {
         // If no email or userId is provided, redirect to login
         if (!email || !userId) {
             navigate('/login');
         }
     }, [email, userId, navigate]);
-    
+
     // Countdown timer for resend OTP
     useEffect(() => {
         if (countdown > 0) {
@@ -34,20 +34,20 @@ const VerifyEmail = () => {
             return () => clearTimeout(timer);
         }
     }, [countdown]);
-    
+
     const handleVerifySubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        
+
         try {
             const response = await axios.post(`${API}/user/verify-otp`, {
                 email,
                 otp
             });
-            
+
             setStatus('success');
             setMessage(response.data.message || 'Email verified successfully!');
-            
+
             // Redirect to login page after successful verification
             setTimeout(() => {
                 navigate('/login');
@@ -59,10 +59,10 @@ const VerifyEmail = () => {
             setLoading(false);
         }
     };
-    
+
     const handleResendOtp = async () => {
         if (countdown > 0) return;
-        
+
         setLoading(true);
         try {
             const response = await axios.post(`${API}/user/resend-otp`, { email });
@@ -76,7 +76,7 @@ const VerifyEmail = () => {
             setLoading(false);
         }
     };
-    
+
     return (
         <div className="login-container">
             <div className="container">
@@ -95,7 +95,7 @@ const VerifyEmail = () => {
                                 <div>{message}</div>
                             </div>
                         )}
-                        
+
                         <div className="row justify-content-center align-items-center">
                             <div className="col-lg-4 col-md-6 col-sm-10 col-12 mb-3 animate-in">
                                 <div className="form-card">
@@ -104,7 +104,7 @@ const VerifyEmail = () => {
                                         <p className="form-subtitle text-center text-muted mb-3">
                                             We've sent a verification code to <strong>{email}</strong>
                                         </p>
-                                        
+
                                         <form onSubmit={handleVerifySubmit}>
                                             <div className="input-group">
                                                 <label className="form-label text-muted">Verification Code</label>
@@ -121,18 +121,18 @@ const VerifyEmail = () => {
                                                     />
                                                 </div>
                                             </div>
-                                            
-                                            <button 
-                                                type="submit" 
+
+                                            <button
+                                                type="submit"
                                                 className="btn text-light btn-gradient w-100 mb-2 d-flex align-items-center justify-content-center"
                                                 disabled={loading}
                                             >
                                                 {loading ? 'Verifying...' : 'Verify Email'}
                                             </button>
-                                            
+
                                             <div className="text-center mt-3">
-                                                <button 
-                                                    type="button" 
+                                                <button
+                                                    type="button"
                                                     className="btn btn-link text-decoration-none"
                                                     onClick={handleResendOtp}
                                                     disabled={countdown > 0 || loading}

@@ -10,189 +10,6 @@ import ProductSkeleton from '../Components/Loader';
 import ProductsPageSkeleton from '../Components/Loader';
 
 const Womens = () => {
-  // CSS styles for product cards and UI components
-  // const styles = {
-  //   productCard: {
-  //     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  //     cursor: 'pointer',
-  //     borderRadius: '16px',
-  //     overflow: 'hidden',
-  //     backgroundColor: '#ffffff',
-  //     boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-  //     border: '1px solid rgba(229, 231, 235, 0.5)',
-  //     position: 'relative',
-  //     width: '320px',
-  //     minWidth: '280px',
-  //     maxWidth: '380px',
-  //     // Hover effects
-  //     '&:hover': {
-  //       transform: 'translateY(-8px) scale(1.02)',
-  //       boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-  //       borderColor: 'rgba(99, 102, 241, 0.3)',
-  //     },
-  //     '&:hover .product-img': {
-  //       transform: 'scale(1.1)',
-  //     },
-  //     '&:hover .product-overlay': {
-  //       opacity: 1,
-  //     },
-  //     '&:active': {
-  //       transform: 'translateY(-4px) scale(1.01)',
-  //     }
-  //   },
-
-  //   productImgContainer: {
-  //     overflow: 'hidden',
-  //     position: 'relative',
-  //     borderRadius: '12px 12px 0 0',
-  //     aspectRatio: '4/3',
-  //     background: 'linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%)',
-  //   },
-
-  //   productImg: {
-  //     width: '100%',
-  //     height: '100%',
-  //     objectFit: 'cover',
-  //     transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-  //     filter: 'brightness(1) saturate(1)',
-  //     className: 'product-img',
-  //   },
-
-  //   productOverlay: {
-  //     position: 'absolute',
-  //     top: 0,
-  //     left: 0,
-  //     width: '100%',
-  //     height: '100%',
-  //     background: '#55555534',
-  //     opacity: 0,
-  //     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-  //     display: 'flex',
-  //     justifyContent: 'center',
-  //     alignItems: 'center',
-  //     backdropFilter: 'blur(2px)',
-  //     className: 'product-overlay',
-  //   },
-
-  //   // Additional elements for complete card styling
-  //   productContent: {
-  //     padding: '20px',
-  //     background: '#ffffff',
-  //   },
-
-  //   productTitle: {
-  //     fontSize: '18px',
-  //     fontWeight: '600',
-  //     color: '#1f2937',
-  //     marginBottom: '8px',
-  //     lineHeight: '1.4',
-  //     transition: 'color 0.3s ease',
-  //   },
-
-  //   productPrice: {
-  //     fontSize: '20px',
-  //     fontWeight: '700',
-  //     color: '#059669',
-  //     marginBottom: '4px',
-  //   },
-
-  //   productOriginalPrice: {
-  //     fontSize: '14px',
-  //     color: '#9ca3af',
-  //     textDecoration: 'line-through',
-  //     marginLeft: '8px',
-  //   },
-
-  //   productDescription: {
-  //     fontSize: '14px',
-  //     color: '#6b7280',
-  //     lineHeight: '1.5',
-  //     marginBottom: '12px',
-  //     display: '-webkit-box',
-  //     WebkitLineClamp: 2,
-  //     WebkitBoxOrient: 'vertical',
-  //     overflow: 'hidden',
-  //   },
-
-  //   productBadge: {
-  //     position: 'absolute',
-  //     top: '12px',
-  //     right: '12px',
-  //     backgroundColor: '#ef4444',
-  //     color: '#ffffff',
-  //     fontSize: '12px',
-  //     fontWeight: '600',
-  //     padding: '4px 8px',
-  //     borderRadius: '20px',
-  //     textTransform: 'uppercase',
-  //     letterSpacing: '0.5px',
-  //     zIndex: 2,
-  //   },
-
-  //   productRating: {
-  //     display: 'flex',
-  //     alignItems: 'center',
-  //     gap: '4px',
-  //     marginBottom: '8px',
-  //   },
-
-  //   productStar: {
-  //     color: '#fbbf24',
-  //     fontSize: '14px',
-  //   },
-
-  //   productRatingText: {
-  //     fontSize: '14px',
-  //     color: '#6b7280',
-  //     marginLeft: '4px',
-  //   },
-
-  //   // Quick action buttons in overlay
-  //   overlayActions: {
-  //     display: 'flex',
-  //     gap: '12px',
-  //   },
-
-  //   overlayButton: {
-  //     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-  //     border: 'none',
-  //     borderRadius: '50%',
-  //     width: '44px',
-  //     height: '44px',
-  //     display: 'flex',
-  //     alignItems: 'center',
-  //     justifyContent: 'center',
-  //     cursor: 'pointer',
-  //     transition: 'all 0.3s ease',
-  //     backdropFilter: 'blur(10px)',
-  //     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-  //     '&:hover': {
-  //       backgroundColor: '#ffffff',
-  //       transform: 'scale(1.1)',
-  //     }
-  //   },
-
-  //   // Responsive variants
-  //   '@media (max-width: 768px)': {
-  //     productCard: {
-  //       width: '100%',
-  //       maxWidth: '300px',
-  //       minWidth: '250px',
-  //       '&:hover': {
-  //         transform: 'translateY(-4px)',
-  //       }
-  //     },
-  //     productContent: {
-  //       padding: '16px',
-  //     },
-  //     productTitle: {
-  //       fontSize: '16px',
-  //     },
-  //     productPrice: {
-  //       fontSize: '18px',
-  //     }
-  //   }
-  // };
 
   // Custom CSS for hover effects
   const handleMouseEnter = (e) => {
@@ -229,7 +46,18 @@ const Womens = () => {
   const [pagination, setpagination] = useState(1)
 
   let { products, loading, error } = useSelector((state) => state.Product);
-  const WomenArr = ["Bras", "Women Joggers", "Women Hoodie", 'Leggings', 'Short Leggings', 'T-shirt']
+  const WomenArr =  [
+        "Sports Bra",
+        "Leggings",
+        "Gym Gloves",
+        "Resistance Bands",
+        "Yoga Mat",    
+        "Shaker Bottle",
+        "Foam Roller",
+        "Headbands/Hairbands",
+        "Water Bottle",
+        "Gym Bag"
+    ]
 
   useEffect(() => {
     dispatch(getData({ route: 'womensproducts', page: pagination }))
@@ -314,7 +142,10 @@ const Womens = () => {
                     <div className="product-details">
                       <div className="d-flex align-items-center mb-1">
                         <span className="fw-bold me-2">${e.price}</span>
-                        {e.discount && e.discount !== 0 && <span className="text-decoration-line-through text-muted">${e.discount}</span>}
+                        {e.discount && e.discount !== 0 && <span className="text-decoration-line-through text-muted">${e.mrp.toLocaleString('en-IN')}</span>}
+                        <span className="discount-badge">
+                          {Math.round(((e.mrp - e.price) / e.mrp) * 100)}% OFF
+                        </span>
                       </div>
 
                       {/* Additional product details */}

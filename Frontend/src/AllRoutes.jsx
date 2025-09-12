@@ -22,6 +22,8 @@ import VerifyEmail from './Pages/VerifyEmail';
 import Cookies from 'js-cookie';
 import Footer from './Components/Footer';
 import { useAuth } from './Contexts/AllContext';
+import ForgotPass from './Pages/ForgotPass';
+import ResetPass from './Pages/ResetPass';
 
 // Protected route component
 const ProtectedRoute = ({ children }) => {
@@ -55,7 +57,9 @@ function App() {
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/accessories" element={<Accessories />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/forgotpassword" element={<ForgotPass />} />
                 <Route path="/verify-email" element={<VerifyEmail />} />
+                <Route path="/reset-password/:token" element={<ResetPass />} />
                 <Route path="/profile" element={
                     <ProtectedRoute>
                        <UserProfile />      

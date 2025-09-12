@@ -353,9 +353,9 @@ const ProductDetail = () => {
                             {product.mrp && product.mrp > product.price && (
                                 <>
                                     <span className="original-price">₹{product.mrp.toLocaleString('en-IN')}</span>
-                                    <span className="discount-badge">
-                                        {Math.round(((product.mrp - product.price) / product.mrp) * 100)}% OFF
-                                    </span>
+                                            <span className="discount-badge">
+                                                {Math.round(((product.mrp - product.price) / product.mrp) * 100)}% OFF
+                                            </span>
                                 </>
                             )}
                         </div>

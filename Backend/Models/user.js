@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema({
         code: { type: String },
         expiresAt: { type: Date }
     },
+    // 🔑 Add these for reset password
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
+
     cart: [{ 
         productId: { type: mongoose.Schema.Types.ObjectId, ref: 'product'},
         quantity: { type: Number, default: 1 },
